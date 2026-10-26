@@ -1,0 +1,283 @@
+<!doctype html>
+<html lang="es"><head><meta charset="utf-8"><title>Mi Repostería · Demo 15s</title>
+<style>
+:root{--crema:#FCF6EC;--cafe:#41261A;--fram:#AF4C60;--rosa:#FFDFE0;--choco:#573222;--suave:#F4EBE0;--sec:#7A6357;--borde:#EBDBCE;--card:#FFFDFA}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{width:1080px;height:1920px;overflow:hidden;background:var(--crema)}
+body{font-family:Inter,sans-serif;color:var(--cafe);-webkit-font-smoothing:antialiased}
+#stage{position:absolute;inset:0;overflow:hidden;background:var(--crema)}
+.serif{font-family:Lora,serif}
+em,.em{font-style:italic;color:var(--fram)}
+.w{display:inline-block;overflow:hidden;vertical-align:top;padding:0 .02em .08em}
+.i{display:inline-block;will-change:transform}
+#hook{position:absolute;left:70px;right:70px;top:640px;font-family:Lora,serif;font-weight:700;font-size:132px;line-height:1.08;letter-spacing:-.01em;text-align:center}
+#hook .em{font-weight:700}
+.cap{position:absolute;left:0;right:0;top:150px;text-align:center}
+.cap .lab{font-weight:700;font-size:28px;letter-spacing:.2em;color:var(--fram);text-transform:uppercase;margin-bottom:18px}
+.cap .tt{font-family:Lora,serif;font-weight:600;font-size:80px;line-height:1.05}
+#cam{position:absolute;inset:0;transform-origin:0 0}
+#phone{position:absolute;left:205px;top:440px;width:414px;height:868px;border-radius:64px;background:#24160f;padding:12px;transform-origin:0 0;box-shadow:0 40px 90px rgba(65,38,26,.28),0 8px 20px rgba(65,38,26,.18)}
+#screen{position:relative;width:390px;height:844px;border-radius:52px;overflow:hidden;background:var(--crema)}
+.status{height:44px;display:flex;justify-content:space-between;align-items:center;padding:0 30px 0 34px;font-weight:600;font-size:15px}
+.island{position:absolute;left:50%;top:10px;width:110px;height:30px;margin-left:-55px;border-radius:20px;background:#24160f}
+.apphead{height:58px;display:flex;align-items:center;gap:12px;padding:0 16px;border-bottom:1px solid var(--borde)}
+.logo{width:38px;height:38px;border-radius:50%;background:var(--suave);border:1px solid var(--borde);display:flex;align-items:center;justify-content:center}
+.apphead .nm{font-family:Lora,serif;font-weight:600;font-size:21px}
+#viewport{position:absolute;top:102px;left:0;right:0;bottom:70px;overflow:hidden}
+#scroll{position:absolute;left:0;right:0;top:0;padding:14px 16px 40px}
+.titlerow{display:flex;align-items:center;gap:10px;margin-bottom:14px}
+.sq{width:46px;height:46px;border-radius:14px;background:var(--suave);display:flex;align-items:center;justify-content:center}
+.namefield{flex:1;height:46px;border:1px solid var(--borde);border-radius:14px;background:var(--card);display:flex;align-items:center;padding:0 14px;font-family:Lora,serif;font-weight:600;font-size:20px}
+.card{background:var(--card);border:1px solid var(--borde);border-radius:22px;padding:16px;margin-bottom:14px;box-shadow:0 2px 8px rgba(65,38,26,.04)}
+.card h3{font-family:Lora,serif;font-weight:600;font-size:19px;margin-bottom:10px}
+.row{overflow:hidden}
+.row .in{display:flex;justify-content:space-between;align-items:center;height:44px;border-bottom:1px solid var(--borde);font-size:15px}
+.row .in b{font-weight:700}
+.addbtn{margin-top:12px;height:44px;border-radius:22px;background:var(--suave);display:flex;align-items:center;justify-content:center;gap:6px;font-size:14px;font-weight:600}
+.lbl{font-size:14px;font-weight:600;color:var(--sec);margin:4px 0 7px}
+.field{height:46px;border:1px solid var(--borde);border-radius:14px;background:var(--card);display:flex;align-items:center;padding:0 14px;font-size:17px;position:relative}
+.field.on{border-color:var(--fram);box-shadow:0 0 0 3px rgba(175,76,96,.15)}
+.caret{display:inline-block;width:2px;height:20px;background:var(--fram);margin-left:2px}
+.help{font-size:12px;color:var(--sec);margin:6px 0 12px}
+.bd{background:var(--suave);border-radius:18px;padding:12px 14px;margin-top:12px}
+.bd .r{display:flex;justify-content:space-between;font-size:14.5px;height:28px;align-items:center}
+.bd .r b{font-weight:700}
+.bd .sep{border-top:1px solid var(--borde);margin:4px 0}
+.bd .tot{font-weight:700}
+#rowPP{border-radius:10px;margin:0 -8px;padding:0 8px}
+.foot{font-size:11.5px;color:var(--sec);margin-top:2px}
+#bottombar{position:absolute;left:0;right:0;bottom:0;height:70px;border-top:1px solid var(--borde);background:var(--crema);display:flex;align-items:center;justify-content:space-between;padding:0 16px 8px}
+#bottombar .c{font-weight:700;font-size:15px}
+.save{height:44px;padding:0 20px;border-radius:22px;background:var(--fram);color:#fff;font-size:15px;font-weight:600;display:flex;align-items:center;gap:7px}
+#tap{position:absolute;width:46px;height:46px;margin:-23px 0 0 -23px;border-radius:50%;background:rgba(65,38,26,.16);border:2.5px solid rgba(65,38,26,.55);pointer-events:none}
+#ripple{position:absolute;width:46px;height:46px;margin:-23px 0 0 -23px;border-radius:50%;border:2.5px solid rgba(175,76,96,.8);pointer-events:none}
+#rosa{position:absolute;left:540px;top:960px;width:10px;height:10px;margin:-5px 0 0 -5px;border-radius:50%;background:var(--rosa)}
+#big{position:absolute;inset:0;text-align:center}
+#big .lab{position:absolute;top:560px;left:0;right:0;font-weight:700;font-size:34px;letter-spacing:.2em;color:var(--fram)}
+#big .num{position:absolute;top:630px;left:0;right:0;font-family:Lora,serif;font-weight:700;font-size:330px;line-height:1;letter-spacing:-.02em}
+#big .sub{position:absolute;top:1010px;left:90px;right:90px;font-size:38px;line-height:1.35;color:var(--choco)}
+#sug{position:absolute;left:150px;right:150px;top:1200px;background:var(--card);border-radius:36px;padding:34px 40px;box-shadow:0 20px 50px rgba(65,38,26,.12);display:flex;justify-content:space-between;align-items:center}
+#sug .k{font-weight:700;font-size:24px;letter-spacing:.16em;color:var(--sec)}
+#sug .v{font-family:Lora,serif;font-weight:700;font-size:96px;line-height:1}
+#sug .g{font-size:28px;color:var(--sec);margin-top:8px}
+#elige{position:absolute;left:0;right:0;top:1520px;text-align:center;font-family:Lora,serif;font-weight:600;font-size:68px}
+#choco{position:absolute;left:540px;top:2050px;width:10px;height:10px;margin:-5px 0 0 -5px;border-radius:50%;background:var(--choco)}
+#end{position:absolute;inset:0;text-align:center;color:var(--crema)}
+#end .lg{position:absolute;left:465px;top:520px;width:150px;height:150px;border-radius:50%;background:var(--crema);display:flex;align-items:center;justify-content:center}
+#end .nm{position:absolute;top:720px;left:0;right:0;font-family:Lora,serif;font-weight:700;font-size:128px;line-height:1}
+#end .tag{position:absolute;top:880px;left:0;right:0;font-weight:700;font-size:30px;letter-spacing:.24em;color:var(--rosa)}
+#end .px{position:absolute;top:1010px;left:0;right:0;font-family:Lora,serif;font-weight:600;font-size:64px}
+#end .px small{font-family:Inter;font-weight:500;font-size:34px;opacity:.85}
+#end .btn{position:absolute;left:190px;right:190px;top:1180px;height:140px;border-radius:70px;background:var(--fram);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:50px;color:#fff;box-shadow:0 18px 40px rgba(0,0,0,.25)}
+#end .note{position:absolute;top:1355px;left:0;right:0;font-size:34px;opacity:.85}
+</style></head>
+<body>
+<div id="stage">
+  <div id="hook" data-words>Tu tres leches, ¿cuánto te cuesta <em>de verdad?</em></div>
+
+  <div class="cap" id="cap1"><div class="lab"><span data-words>Paso 1 de 3</span></div><div class="tt" data-words>Anota lo que usas.</div></div>
+  <div class="cap" id="cap2"><div class="lab"><span data-words>Paso 2 de 3</span></div><div class="tt" data-words>Incluye tu trabajo.</div></div>
+  <div class="cap" id="cap3"><div class="lab"><span data-words>Paso 3 de 3</span></div><div class="tt" data-words>Consulta tu costo.</div></div>
+
+  <div id="cam">
+    <div id="phone"><div id="screen">
+      <div class="island"></div>
+      <div class="status"><span>9:41</span><span style="display:flex;gap:6px;align-items:center"><svg width="18" height="12" viewBox="0 0 18 12"><rect x="0" y="8" width="3" height="4" rx="1" fill="#41261A"/><rect x="5" y="5" width="3" height="7" rx="1" fill="#41261A"/><rect x="10" y="2" width="3" height="10" rx="1" fill="#41261A"/><rect x="15" y="0" width="3" height="12" rx="1" fill="#41261A"/></svg><svg width="26" height="12" viewBox="0 0 26 12"><rect x=".5" y=".5" width="22" height="11" rx="3" fill="none" stroke="#41261A"/><rect x="2" y="2" width="17" height="8" rx="2" fill="#41261A"/><rect x="23.5" y="4" width="2" height="4" rx="1" fill="#41261A"/></svg></span></div>
+      <div class="apphead"><div class="logo"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#41261A" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20h16v-7a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2z"/><path d="M4 15c1.5 1.2 3 1.2 4 0s3-1.2 4 0 3 1.2 4 0 2.5-1.2 4 0"/><path d="M12 11V7"/><path d="M12 7c-1 0-1.5-1-1-2s1-1.5 1-2c0 .5.5 1 1 2s0 2-1 2z"/></svg></div><div class="nm">Mi Repostería</div></div>
+      <div id="viewport"><div id="scroll">
+        <div class="titlerow">
+          <div style="width:22px;display:flex;justify-content:center"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#41261A" stroke-width="2.2" stroke-linecap="round"><path d="M19 12H5M11 6l-6 6 6 6"/></svg></div>
+          <div class="sq"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#41261A" stroke-width="1.8" stroke-linejoin="round"><path d="M4 8h3l2-3h6l2 3h3v11H4z"/><circle cx="12" cy="13" r="3.5"/></svg></div>
+          <div class="namefield">Torta tres leches</div>
+        </div>
+        <div class="card" id="cardA"><h3>Ingredientes de la receta</h3>
+          <div class="row" id="ing0"><div class="in"><span>Leche condensada</span><b>$3.20</b></div></div>
+          <div class="row" id="ing1"><div class="in"><span>Leche evaporada</span><b>$2.40</b></div></div>
+          <div class="row" id="ing2"><div class="in"><span>Crema para batir</span><b>$4.80</b></div></div>
+          <div class="row" id="ing3"><div class="in"><span>Huevos, harina y azúcar</span><b>$4.00</b></div></div>
+          <div class="addbtn" id="addBtn"><svg width="15" height="15" viewBox="0 0 24 24" stroke="#41261A" stroke-width="2.4" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>Agregar ingrediente</div>
+        </div>
+        <div class="card" id="cardB"><h3>Costos extra</h3>
+          <div class="lbl">Tiempo de trabajo</div>
+          <div class="field" id="fTime"><span id="vTime"></span><span class="caret" id="cTime"></span></div>
+          <div class="help">minutos por tanda</div>
+          <div class="lbl">Empaque por porción $</div>
+          <div class="field" id="fPack"><span id="vPack"></span><span class="caret" id="cPack"></span></div>
+          <div class="help">caja, base, cinta por unidad entera</div>
+        </div>
+        <div class="card" id="cardC"><h3>Rendimiento</h3>
+          <div class="lbl">Rinde (porciones)</div>
+          <div class="field" id="fRinde"><span id="vRinde"></span><span class="caret" id="cRinde"></span></div>
+          <div class="bd">
+            <div class="r bdr" id="b0"><span>Ingredientes</span><b>$14.40</b></div>
+            <div class="r bdr" id="b1"><span>Mano de obra (90 min × $15/h)</span><b>$22.50</b></div>
+            <div class="r bdr" id="b2"><span>Indirectos (10%)</span><b>$1.44</b></div>
+            <div class="sep"></div>
+            <div class="r tot bdr" id="b3"><span>Total tanda</span><b>$38.34</b></div>
+            <div class="sep"></div>
+            <div class="r tot bdr" id="rowPP"><span>Costo por porción</span><b>$2.75</b></div>
+            <div class="foot bdr" id="b5">= tanda $38.34 ÷ 16 porciones + empaque $0.35</div>
+          </div>
+        </div>
+        <div class="card" id="cardD"><h3>Precio de venta</h3>
+          <div class="bd" style="margin-top:4px">
+            <div class="r"><b>Por porción</b><span style="color:var(--sec)">Costo: <b style="color:var(--cafe)">$2.75</b></span></div>
+            <div style="display:flex;justify-content:space-between;align-items:flex-end;margin-top:8px">
+              <div><div style="font-size:11px;font-weight:700;letter-spacing:.06em;color:var(--sec)">PRECIO SUGERIDO</div><div class="serif" style="font-size:30px;font-weight:600;color:var(--choco)">$4.58</div></div>
+              <div style="text-align:right;font-size:13px;color:var(--sec)"><div>Ganancia: $1.83</div><div>Markup: 67%</div></div>
+            </div>
+          </div>
+        </div>
+      </div></div>
+      <div id="bottombar"><div class="c">Costo por porción <span id="bbv">—</span></div><div class="save"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linejoin="round"><path d="M5 4h11l3 3v13H5z"/><path d="M8 4v5h7V4M8 20v-6h8v6"/></svg>Guardar</div></div>
+      <div id="ripple"></div><div id="tap"></div>
+    </div></div>
+  </div>
+
+  <div id="rosa"></div>
+  <div id="big">
+    <div class="lab" id="bigLab">COSTO REAL POR PORCIÓN</div>
+    <div class="num" id="bigNum">$2.75</div>
+    <div class="sub" id="bigSub">Ingredientes + tu tiempo + gastos + empaque.</div>
+    <div id="sug"><div><div class="k">PRECIO SUGERIDO</div><div class="g">con 40% de margen</div></div><div style="text-align:right"><div class="v">$4.58</div><div class="g">ganancia $1.83</div></div></div>
+    <div id="elige" data-words>El precio final <em>lo eliges tú.</em></div>
+  </div>
+
+  <div id="choco"></div>
+  <div id="end">
+    <div class="lg" id="eLg"><svg width="78" height="78" viewBox="0 0 24 24" fill="none" stroke="#573222" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20h16v-7a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2z"/><path d="M4 15c1.5 1.2 3 1.2 4 0s3-1.2 4 0 3 1.2 4 0 2.5-1.2 4 0"/><path d="M12 11V7"/><path d="M12 7c-1 0-1.5-1-1-2s1-1.5 1-2c0 .5.5 1 1 2s0 2-1 2z"/></svg></div>
+    <div class="nm" id="eNm" data-words>Mi Repostería</div>
+    <div class="tag" id="eTag">CALCULADORA PARA REPOSTERAS</div>
+    <div class="px" id="ePx">$47 USD <small>· un solo pago</small></div>
+    <div class="btn" id="eBtn">Comenta «COSTO»</div>
+    <div class="note" id="eNote">y te envío el link por mensaje</div>
+  </div>
+</div>
+<script src="lib.js"></script>
+<script>
+splitWords();
+const DUR = 15;
+const SC = 1.62; // phone scale
+const ING_T = [2.95, 3.45, 3.95, 4.45];
+const TAPS = [[2.95,"addBtn"],[3.45,"addBtn"],[3.95,"addBtn"],[4.45,"addBtn"],[5.75,"fTime"],[6.55,"fPack"],[7.75,"fRinde"]];
+const T_DROP = 9.0;
+let ZC = null;
+
+function typed(t, start, str, step){ const n = clamp(Math.floor((t - start) / step) + 1, 0, str.length); return t < start ? "" : str.slice(0, n); }
+
+function layout(t){
+  // ---- hook ----
+  words("hook", t, 0.05, 0.15, 2.15, 0.3);
+  // ---- captions ----
+  const caps = [["cap1",2.45,5.0],["cap2",5.05,7.15],["cap3",7.2,T_DROP-0.1]];
+  caps.forEach(([id,a,b])=>{ $(id).querySelectorAll("[data-words]").forEach((el,k)=>words(el,t,a+k*0.08,0.09,b,0.25)); });
+  // ---- phone rise ----
+  const rise = spring(t, 2.15, 1.5, 0.78);
+  css("phone",{transform:`translateY(${(1-rise)*1500}px) scale(${SC})`});
+  // ---- ingredient rows ----
+  ING_T.forEach((tt,n)=>{
+    const k = spring(t, tt+0.05, 2.6, 0.8);
+    css("ing"+n,{height:(clamp(k,0,1.2)*44)+"px",opacity:clamp(k*1.5)});
+  });
+  // ---- fields typing ----
+  const typing = [["Time","90",5.85,0.16,5.65,6.45],["Pack","0.35",6.65,0.12,6.45,7.3],["Rinde","16",7.85,0.16,7.65,8.4]];
+  typing.forEach(([k,s,st,step,on,off])=>{
+    $("v"+k).textContent = typed(t,st,s,step);
+    const active = t>=on && t<off;
+    $("f"+k).classList.toggle("on",active);
+    $("c"+k).style.opacity = active && (Math.floor((t-on)*3)%2===0 || t<st+s.length*step+0.1) ? 1 : 0;
+  });
+  // ---- breakdown cascade ----
+  document.querySelectorAll(".bdr").forEach((el,n)=>{
+    const k = spring(t, 8.0 + n*0.17, 2.6, 0.75);
+    css(el,{opacity:clamp(k*1.4),transform:`translateY(${(1-clamp(k))*14}px)`});
+  });
+  const kd = spring(t, 8.45, 2.4, 0.75);
+  css("cardD",{opacity:clamp(kd*1.4),transform:`translateY(${(1-clamp(kd))*30}px)`});
+  const pp = prog(t,8.85,9.05);
+  $("rowPP").style.background = `rgba(255,223,224,${pp})`;
+  $("bbv").textContent = t>=8.85 ? "$2.75" : "—";
+  // ---- scroll ----
+  const yB = $("cardB").offsetTop - 14, yC = $("cardC").offsetTop - 14;
+  const sy = keys(t,[[5.0,0],[5.5,yB],[7.2,yB],[7.62,yC]]);
+  css("scroll",{transform:`translateY(${-sy}px)`});
+}
+
+function tapDot(t){
+  const scr = $("screen").getBoundingClientRect(); const s = scr.width/390;
+  const pos = (id)=>{ const r=$(id).getBoundingClientRect(); return [(r.left+r.width/2-scr.left)/s,(r.top+r.height/2-scr.top)/s]; };
+  let p = null, vis = 0;
+  if (t>2.6 && t<8.3){
+    let i = TAPS.findIndex(([tt])=>t<tt);
+    if (i===-1) i = TAPS.length;
+    const prev = TAPS[Math.max(0,i-1)], next = TAPS[Math.min(TAPS.length-1,i)];
+    const a = pos(prev[1]), b = pos(next[1]);
+    const k = i===0 ? 1 : eIO(prog(t, next[0]-0.38, next[0]-0.06));
+    p = [lerp(a[0],b[0],k), lerp(a[1],b[1],k)];
+    vis = prog(t,2.6,2.8) * (1-prog(t,8.0,8.3));
+  }
+  let press = 1, rip = 0, ripT = -1;
+  TAPS.forEach(([tt])=>{ const d=t-tt; if(d>-0.08&&d<0.12) press=0.8; if(d>=0&&d<0.45){rip=d/0.45;ripT=tt;} });
+  if (p){
+    css("tap",{left:p[0]+"px",top:p[1]+"px",opacity:vis,transform:`scale(${press})`});
+    css("ripple",{left:p[0]+"px",top:p[1]+"px",opacity:ripT>0?(1-rip)*vis:0,transform:`scale(${1+rip*1.6})`});
+  } else { css("tap",{opacity:0}); css("ripple",{opacity:0}); }
+}
+
+function camera(t){
+  const k = eIO(prog(t, T_DROP, T_DROP+0.45));
+  const S = 2.6;
+  if (!ZC || k===0){ css("cam",{transform:"none"}); return; }
+  const s = lerp(1,S,k), tx = lerp(0,540-ZC[0]*S,k), ty = lerp(0,960-ZC[1]*S,k);
+  css("cam",{transform:`translate(${tx}px,${ty}px) scale(${s})`});
+}
+
+function finale(t){
+  // rosa flood
+  const r = eOut(prog(t, T_DROP+0.32, T_DROP+0.78)) * 1250;
+  css("rosa",{transform:`scale(${r/5})`,opacity:t>T_DROP+0.3?1:0});
+  const on = t > T_DROP+0.55;
+  css("big",{opacity:on?1:0});
+  const kl = spring(t, T_DROP+0.6, 2.2, 0.8);
+  css("bigLab",{opacity:clamp(kl),transform:`translateY(${(1-kl)*30}px)`});
+  const kn = spring(t, T_DROP+0.55, 1.8, 0.62);
+  css("bigNum",{transform:`scale(${0.6+0.4*kn})`,opacity:clamp(kn*2)});
+  $("bigNum").textContent = money(2.75*eOut(prog(t,T_DROP+0.55,T_DROP+1.25)));
+  const ks = spring(t, T_DROP+1.25, 2, 0.8);
+  css("bigSub",{opacity:clamp(ks),transform:`translateY(${(1-ks)*30}px)`});
+  const kg = spring(t, 10.85, 1.9, 0.68);
+  css("sug",{opacity:clamp(kg*1.6),transform:`translateY(${(1-kg)*120}px) scale(${0.9+0.1*kg})`});
+  words("elige", t, 11.7, 0.13);
+  // chocolate end card
+  const rc = eOut(prog(t, 12.55, 13.15)) * 2400;
+  css("choco",{transform:`scale(${rc/5})`,opacity:t>12.5?1:0});
+  const endOn = t>12.85;
+  css("end",{opacity:endOn?1:0});
+  const kl2 = spring(t,12.9,2,0.6);
+  css("eLg",{transform:`scale(${kl2})`});
+  words("eNm", t, 13.05, 0.14);
+  [["eTag",13.4],["ePx",13.65],["eBtn",13.9],["eNote",14.15]].forEach(([id,a])=>{
+    const k = spring(t,a,2.2,0.72);
+    css(id,{opacity:clamp(k*1.5),transform:`translateY(${(1-k)*40}px)`+(id==="eBtn"?` scale(${1+0.05*Math.sin(Math.max(0,t-14.5)*6)*(t>14.5?1:0)})`:"")});
+  });
+}
+
+window.seek = (t)=>{ layout(t); camera(t); tapDot(t); finale(t); };
+
+// Measure zoom target once (deterministic): cost-per-portion row centre at drop time.
+(function(){
+  layout(T_DROP); css("cam",{transform:"none"});
+  const r = $("rowPP").getBoundingClientRect(); ZC = [r.left + r.width/2, r.top + r.height/2];
+  // sound events
+  ING_T.forEach(t=>{sfx(t,"tap"); sfx(t+0.06,"pop");});
+  for (const [st,len,step] of [[5.85,2,0.16],[6.65,4,0.12],[7.85,2,0.16]]) for(let i=0;i<len;i++) sfx(st+i*step,"key");
+  [5.75,6.55,7.75].forEach(t=>sfx(t,"tap"));
+  for(let n=0;n<6;n++) sfx(8.0+n*0.17,"tick");
+  sfx(T_DROP,"whoosh"); sfx(T_DROP+0.55,"drop"); sfx(T_DROP+1.25,"chime");
+  sfx(10.85,"pop"); sfx(12.55,"whoosh"); sfx(13.05,"sparkle"); sfx(13.9,"pop");
+  [0.05,0.5,1.0,1.4].forEach(t=>sfx(t,"thud"));
+  window.DUR = DUR; window.DROP = T_DROP;
+  seek(0);
+})();
+</script>
+</body></html>

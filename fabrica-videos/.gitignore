@@ -1,0 +1,6 @@
+/assets/
+/out/
+/tmp/
+/receta-voz.html
+__pycache__/
+*.wav

@@ -1,0 +1,234 @@
+<!doctype html>
+<html lang="es"><head><meta charset="utf-8"><title>Mi Repostería · Receta v3 (voz)</title>
+<style>
+:root{--crema:#FCF6EC;--cafe:#41261A;--fram:#AF4C60;--rosa:#FFDFE0;--choco:#573222;--sec:#7A6357}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{width:1080px;height:1920px;overflow:hidden;background:#F3E7D8}
+body{font-family:Inter,sans-serif;color:var(--cafe);-webkit-font-smoothing:antialiased}
+#stage{position:absolute;inset:0;overflow:hidden;background:radial-gradient(120% 70% at 50% 55%,#FBF4EA,#EEDFCB)}
+.abs{position:absolute}
+em,.em{font-style:italic;color:var(--fram)}
+.w{display:inline-block;overflow:hidden;vertical-align:top;padding:0 .02em .1em}
+.i{display:inline-block}
+.mask{overflow:hidden;display:block}
+.mask>span,.mask>div{display:inline-block}
+.col{position:absolute;left:80px;right:150px;text-align:center}
+.lab{font-weight:700;font-size:32px;letter-spacing:.2em;color:var(--fram)}
+/* hook */
+#hook{position:absolute;inset:0;z-index:5}
+#cv{position:absolute;left:0;top:0}
+#hookSh{position:absolute;inset:0;background:linear-gradient(180deg,rgba(40,22,14,.8),rgba(40,22,14,.5) 30%,rgba(40,22,14,0) 46%)}
+#hA{top:230px;font-family:Lora,serif;font-weight:700;font-size:88px;line-height:1.06;color:var(--crema);text-shadow:0 4px 30px rgba(0,0,0,.35)}
+#hB{top:260px;font-family:Lora,serif;font-weight:700;font-style:italic;font-size:110px;line-height:1.06;color:var(--rosa);text-shadow:0 4px 30px rgba(0,0,0,.35)}
+/* scene 2 / 4 numbers */
+#nLab{top:225px}
+#num{top:268px;font-family:Lora,serif;font-weight:700;font-size:220px;line-height:1;color:var(--cafe)}
+#sub{top:520px;font-family:Lora,serif;font-style:italic;font-weight:600;font-size:62px;color:var(--fram)}
+#pan{left:95px;top:760px;z-index:2;filter:drop-shadow(0 30px 40px rgba(65,38,26,.25))}
+#glow{left:60px;top:720px;width:890px;height:650px;border-radius:120px;background:radial-gradient(closest-side,rgba(255,140,50,.55),rgba(255,140,50,0));z-index:2}
+/* scene 3 */
+#flood{background:var(--choco);border-radius:50%;z-index:6}
+#s3{position:absolute;inset:0;z-index:7;color:var(--crema)}
+#s3a{top:300px;font-family:Lora,serif;font-weight:700;font-size:100px;line-height:1.06}
+#s3b{top:520px;font-family:Lora,serif;font-weight:700;font-style:italic;font-size:150px;line-height:1;color:var(--rosa)}
+#s3c{top:720px;font-size:50px;font-weight:600}
+#s3n{top:830px;font-family:Lora,serif;font-weight:700;font-size:230px;line-height:1;color:var(--rosa)}
+#clock{position:absolute;left:430px;top:1140px;width:150px;height:150px}
+/* final */
+#cell{position:absolute;overflow:hidden;z-index:8;box-shadow:0 30px 60px rgba(65,38,26,.35)}
+#cell img{position:absolute;left:0;top:0;width:100%;height:100%;object-fit:cover;transform-origin:50% 0}
+#cellTex{position:absolute;inset:0;background:#FFFCF6;background-image:radial-gradient(#9A5A2E 3px,transparent 3.6px);background-size:36px 32px}
+#fin{position:absolute;inset:0;z-index:9;color:var(--crema)}
+#finSh{position:absolute;inset:0;background:linear-gradient(180deg,rgba(40,22,14,.6),rgba(40,22,14,.15) 30%,rgba(40,22,14,0) 40%)}
+#fLab{top:225px;color:var(--rosa)}
+#fNum{top:268px;font-family:Lora,serif;font-weight:700;font-size:220px;line-height:1;text-shadow:0 6px 40px rgba(0,0,0,.35)}
+#card{position:absolute;left:90px;width:830px;top:525px;height:320px;border-radius:44px;background:var(--choco);text-align:center;box-shadow:0 30px 60px rgba(0,0,0,.3);transform-origin:50% 0}
+#card .a{position:absolute;left:0;right:0;top:28px;font-size:38px;color:var(--rosa)}
+#card .b{position:absolute;left:0;right:0;top:70px;font-family:Lora,serif;font-weight:700;font-size:72px;line-height:1.1}
+#card .c{position:absolute;left:0;right:0;top:160px;font-family:Lora,serif;font-weight:700;font-size:72px;line-height:1.1}
+#card .c .em{color:var(--rosa)}
+#card .d{position:absolute;left:0;right:0;top:258px;font-size:36px;color:var(--rosa)}
+</style></head><body>
+<div id="stage">
+  <div id="nLab" class="col lab"><div class="mask"><span>INGREDIENTES PARA 16 PORCIONES</span></div><div class="mask" style="margin-top:-41px"><span>TODO SUMADO ÷ 16 PORCIONES</span></div></div>
+  <div id="num" class="col">$0.00</div>
+  <div id="sub" class="col"><div class="mask"><span>Parece poco, ¿verdad?</span></div><div class="mask" style="margin-top:-82px"><span>por porción</span></div></div>
+  <div id="glow" class="abs"></div>
+  <svg id="pan" class="abs" width="820" height="570" viewBox="0 0 820 570">
+    <defs>
+      <clipPath id="pc"><rect x="14" y="14" width="792" height="542" rx="30"/></clipPath>
+      <clipPath id="wc"><circle id="whipClip" cx="410" cy="285" r="0"/></clipPath>
+      <pattern id="crumb" width="44" height="40" patternUnits="userSpaceOnUse"><circle cx="8" cy="10" r="3" fill="rgba(150,90,40,.28)"/><circle cx="30" cy="28" r="2.2" fill="rgba(255,255,255,.45)"/><circle cx="34" cy="8" r="1.6" fill="rgba(150,90,40,.22)"/></pattern>
+      <pattern id="holes" width="66" height="60" patternUnits="userSpaceOnUse"><circle cx="20" cy="20" r="5" fill="rgba(110,60,25,.55)"/><circle cx="31" cy="20" r="5" fill="rgba(110,60,25,.55)"/></pattern>
+      <pattern id="cin" width="30" height="28" patternUnits="userSpaceOnUse"><circle cx="6" cy="7" r="2.6" fill="#9A5A2E"/><circle cx="20" cy="19" r="1.8" fill="#B7743A"/></pattern>
+      <pattern id="sug" width="14" height="14" patternUnits="userSpaceOnUse"><rect width="14" height="14" fill="#FFFFFF"/><circle cx="4" cy="4" r="2" fill="#EDE6DA"/><circle cx="11" cy="10" r="1.5" fill="#E2D9CB"/></pattern>
+      <radialGradient id="flr"><stop offset="0" stop-color="#FFFFFF"/><stop offset=".7" stop-color="#FBF8F2"/><stop offset="1" stop-color="#FBF8F2" stop-opacity="0"/></radialGradient>
+      <radialGradient id="yolk"><stop offset="0" stop-color="#FFD25A"/><stop offset="1" stop-color="#F2A62A"/></radialGradient>
+    </defs>
+    <g clip-path="url(#pc)">
+      <rect width="820" height="570" fill="#F7F0E4"/>
+      <g id="eggs"></g>
+      <circle id="sugar" cx="300" cy="300" r="0" fill="url(#sug)"/>
+      <circle id="flour" cx="520" cy="270" r="0" fill="url(#flr)"/>
+      <circle id="batter" cx="410" cy="285" r="0" fill="#F2D9A0"/>
+      <rect id="crumbR" width="820" height="570" fill="url(#crumb)" opacity="0"/>
+      <rect id="holesR" width="820" height="0" fill="url(#holes)"/>
+      <rect id="wet" width="820" height="570" fill="#FFF3DC" opacity="0"/>
+      <path id="drC" d="M70 80 L750 80 L70 175 L750 175 L70 270 L750 270 L70 365 L750 365 L70 460 L750 460" fill="none" stroke="#F1D7A0" stroke-width="30" stroke-linecap="round" stroke-linejoin="round"/>
+      <g id="pud"><circle cx="240" cy="190" r="0"/><circle cx="560" cy="330" r="0"/><circle cx="360" cy="420" r="0"/><circle cx="640" cy="140" r="0"/></g>
+      <path id="drK" d="M90 60 L90 510 L235 60 L235 510 L380 60 L380 510 L525 60 L525 510 L670 60 L670 510 L740 60" fill="none" stroke="#FFFFFF" stroke-width="24" stroke-linecap="round" stroke-linejoin="round"/>
+      <g clip-path="url(#wc)">
+        <rect width="820" height="570" fill="#FFFCF6"/>
+        <g fill="none" stroke="#EADBC8" stroke-width="5" stroke-linecap="round">
+          <path d="M410 285 m-40 0 a40 40 0 1 1 80 0 a80 80 0 1 1 -160 0 a120 120 0 1 1 240 0 a160 160 0 1 1 -320 0 a200 200 0 1 1 400 0 a240 240 0 1 1 -480 0 a280 280 0 1 1 560 0 a320 320 0 1 1 -640 0 a360 360 0 1 1 720 0"/>
+        </g>
+        <rect id="cinR" width="820" height="570" fill="url(#cin)" opacity="0"/>
+      </g>
+      <g id="cuts" stroke="#D9BC99" stroke-width="7" stroke-linecap="round"></g>
+      <circle id="head" r="17" fill="#F1D7A0"/>
+    </g>
+    <rect x="7" y="7" width="806" height="556" rx="36" fill="none" stroke="rgba(185,160,135,.85)" stroke-width="14"/>
+    <rect x="16" y="16" width="788" height="538" rx="28" fill="none" stroke="rgba(255,255,255,.7)" stroke-width="3"/>
+  </svg>
+  <div id="hook"><canvas id="cv" width="1080" height="1920"></canvas><div id="hookSh"></div>
+    <div id="hA" class="col"><div data-words>¿Vendes tu</div><div data-words>tres leches a $2.50</div><div data-words>la porción?</div></div>
+    <div id="hB" class="col"><div data-words>Estás perdiendo</div><div data-words>dinero.</div></div></div>
+  <div id="flood" class="abs"></div>
+  <div id="s3">
+    <div id="s3a" class="col"><div data-words>Pero te falta</div><div data-words>lo más caro:</div></div>
+    <div id="s3b" class="col"><div data-words>tu tiempo.</div></div>
+    <div id="s3c" class="col"><span class="mask"><span>1 h 30 min de trabajo</span></span></div>
+    <div id="s3n" class="col">+$0.00</div>
+    <svg id="clock" viewBox="0 0 170 170"><circle cx="85" cy="85" r="76" fill="none" stroke="#FFDFE0" stroke-width="8"/><line id="hm" x1="85" y1="85" x2="85" y2="34" stroke="#FFDFE0" stroke-width="8" stroke-linecap="round"/><line id="hh" x1="85" y1="85" x2="85" y2="52" stroke="#FCF6EC" stroke-width="10" stroke-linecap="round"/></svg>
+  </div>
+  <div id="cell"><img id="sliceImg" src="assets/slice.jpg"><div id="cellTex"></div></div>
+  <div id="fin"><div id="finSh"></div>
+    <div id="fLab" class="col lab"><span class="mask"><span>TU COSTO REAL POR PORCIÓN</span></span></div>
+    <div id="fNum" class="col">$2.75</div>
+    <div id="card"><div class="a mask"><span>Esta cuenta la hace</span></div><div class="b mask"><span>Mi Repostería</span></div>
+      <div class="c mask"><span>Comenta <em>«COSTO»</em></span></div><div class="d mask"><span>y te envío el link por mensaje</span></div></div>
+  </div>
+</div>
+<script src="lib.js"></script>
+<script>
+splitWords();
+const vis = (id, on) => { (typeof id === "string" ? $(id) : id).style.display = on ? "" : "none"; };
+function maskIn(el, t, tin, tout = 1e9, step = 0.12) {
+  if (typeof el === "string") el = $(el);
+  (el.classList.contains("mask") ? [el] : [...el.querySelectorAll(".mask")]).forEach((m, n) => {
+    const s = m.firstElementChild, kin = spring(t, tin + n * step, 2.4, 0.78), kout = eIn(prog(t, tout, tout + 0.25));
+    s.style.transform = `translateY(${(1 - kin) * 115 - kout * 130}%)`;
+  });
+}
+const mix = (a, b, k) => `rgb(${a.map((v, i) => Math.round(lerp(v, b[i], k))).join(",")})`;
+const NS = "http://www.w3.org/2000/svg";
+
+// ---------- voice cues (seconds into the voice-over) ----------
+const C = %%CUES%%;
+const DUR = C.end + 1.2, DROP = C.s3;
+
+// ---------- hook frames ----------
+const NF = %%NF%%, frames = [], cv = $("cv"), g2 = cv.getContext("2d");
+window.READY = Promise.all(Array.from({length: NF}, (_, i) => { const im = new Image(); im.src = `assets/clip2/f${String(i + 1).padStart(3, "0")}.jpg`; frames.push(im); return im.decode().catch(() => {}); }))
+  .then(() => $("sliceImg").decode().catch(() => {})).then(() => seek(window._t || 0));
+function drawFrame(t) { const im = frames[Math.min(NF - 1, Math.floor(t * 30))]; if (!im || !im.naturalWidth) return;
+  const s = Math.max(1080 / im.naturalWidth, 1920 / im.naturalHeight), w = im.naturalWidth * s, h = im.naturalHeight * s; g2.drawImage(im, (1080 - w) / 2, (1920 - h) / 2, w, h); }
+
+// ---------- pan ----------
+const PX = 95, PY = 760, CW = 792 / 4, CH = 542 / 4;
+const EGGS = [[260, 200], [400, 160], [560, 230], [330, 360], [500, 390]];
+EGGS.forEach(([x, y]) => { const g = document.createElementNS(NS, "g"); g.innerHTML = `<ellipse rx="44" ry="40" fill="#FFFDF8" opacity=".95"/><circle r="22" fill="url(#yolk)"/>`; $("eggs").appendChild(g); });
+const eggEls = [...$("eggs").children];
+for (let k = 1; k < 4; k++) $("cuts").insertAdjacentHTML("beforeend", `<line x1="${14 + CW * k}" y1="14" x2="${14 + CW * k}" y2="556"/>`);
+for (let k = 1; k < 4; k++) $("cuts").insertAdjacentHTML("beforeend", `<line x1="14" y1="${14 + CH * k}" x2="806" y2="${14 + CH * k}"/>`);
+const cutEls = [...$("cuts").children], drC = $("drC"), drK = $("drK"), LC = drC.getTotalLength(), LK = drK.getTotalLength(), puds = [...$("pud").children];
+$("holesR").setAttribute("height", 0);
+
+window.seek = (t) => {
+  window._t = t;
+  const S2 = C.s2, S3 = C.s3, S4 = C.s4, S5 = C.s5;
+  // ===== 1 HOOK: slow-motion pour =====
+  vis("hook", t < S2 + 0.5);
+  if (t < S2 + 0.5) drawFrame(t);
+  const close = eIO(prog(t, S2, S2 + 0.5));
+  $("hook").style.clipPath = close > 0 ? `circle(${lerp(1250, 0, close)}px at 505px 1045px)` : "none";
+  [...$("hA").children].forEach((d, i) => words(d, t, -0.8, 0, C.p2 - 0.3, 0.25));
+  [...$("hB").children].forEach((d, i) => words(d, t, C.p2 + i * 0.3, 0.12, S2 - 0.1, 0.2));
+
+  // ===== 2 INGREDIENTS (montage in the pan, one number) =====
+  const a = S2 + 0.25;
+  vis("pan", t >= S2 - 0.01 && t < S5 + 0.9);
+  eggEls.forEach((g, i) => { const at = a + i * 0.1, k = spring(t, at, 3, 0.55); const [x, y] = EGGS[i]; g.setAttribute("transform", `translate(${x},${y}) scale(${clamp(k, 0, 1.25)})`); g.style.display = t >= at ? "" : "none"; });
+  $("sugar").setAttribute("r", 110 * eOut(prog(t, a + 0.45, a + 0.8)));
+  $("flour").setAttribute("r", 150 * eOut(prog(t, a + 0.7, a + 1.05)));
+  $("batter").setAttribute("r", 560 * eIO(prog(t, a + 1.1, a + 1.55)));
+  const bake = eIO(prog(t, a + 1.6, a + 2.1));
+  css("glow", {opacity: Math.sin(Math.PI * prog(t, a + 1.55, a + 2.2)) * 0.9});
+  const dc = eIO(prog(t, a + 2.2, a + 2.8)); drC.style.strokeDasharray = LC; drC.style.strokeDashoffset = LC * (1 - dc); drC.style.display = t > a + 2.2 ? "" : "none";
+  const soakC = eIO(prog(t, a + 2.8, a + 3.1)); drC.style.opacity = 1 - soakC;
+  puds.forEach((c, i) => { const at = a + 2.7 + i * 0.08; c.setAttribute("r", 150 * eOut(prog(t, at, at + 0.4))); c.setAttribute("fill", "rgba(255,250,240,.88)"); c.style.opacity = 1 - eIn(prog(t, a + 3.15, a + 3.45)); });
+  drK.style.display = "none";
+  const soak = (soakC + eIO(prog(t, a + 3.15, a + 3.45))) / 2;
+  $("batter").setAttribute("fill", mix(mix([242, 217, 160], [228, 170, 88], bake).match(/\d+/g).map(Number), [238, 196, 128], soak * 0.75));
+  $("crumbR").setAttribute("opacity", bake); $("wet").setAttribute("opacity", soak * 0.35);
+  $("whipClip").setAttribute("r", 560 * eIO(prog(t, a + 3.5, a + 4.0)));
+  $("cinR").setAttribute("opacity", eOut(prog(t, a + 3.95, a + 4.2)));
+  $("head").style.display = t > a + 2.2 && t < a + 2.8 ? "" : "none";
+  if (t > a + 2.2 && t < a + 2.8) { const p = drC.getPointAtLength(LC * dc); $("head").setAttribute("cx", p.x); $("head").setAttribute("cy", p.y); }
+
+  // label + number + subtitle (shared by scenes 2 and 4)
+  const L = $("nLab").querySelectorAll(".mask");
+  maskIn(L[0], t, S2 + 0.3, S3 - 0.2); maskIn(L[1], t, S4 + 0.3, S5 + 0.3);
+  vis("num", t >= S2 && t < S5 + 0.5);
+  let v = 0, kNum = 0;
+  if (t < S4) { v = 14.40 * eOut(prog(t, C.n1, C.n1 + 0.7)); kNum = spring(t, C.n1 - 0.1, 2.2, 0.62) * (1 - eIn(prog(t, S3 - 0.2, S3))); }
+  else { v = 38.34 * eOut(prog(t, S4 + 0.3, S4 + 1.2)); if (t > C.n3) v = lerp(38.34, 2.75, eOut(prog(t, C.n3, C.n3 + 0.6))); kNum = spring(t, S4 + 0.25, 2.2, 0.62); }
+  $("num").textContent = money(v);
+  css("num", {transform: `scale(${clamp(kNum, 0, 1.2)})`, color: t > C.n3 ? "#AF4C60" : "#41261A"});
+  const SB = $("sub").querySelectorAll(".mask"); maskIn(SB[0], t, C.p5, S3 - 0.2); maskIn(SB[1], t, C.n3 + 0.3, S5 + 0.3);
+
+  // ===== 3 YOUR TIME (takeover) =====
+  vis("flood", t >= S3 && t < S4 + 0.05); vis("s3", t >= S3 + 0.15 && t < S4 - 0.1);
+  { const R = lerp(60, 2300, eIO(prog(t, S3, S3 + 0.4))) * (1 - eIO(prog(t, S4 - 0.45, S4))) + 60 * eIO(prog(t, S4 - 0.45, S4));
+    css("flood", {left: 505 - R + "px", top: 380 - R + "px", width: 2 * R + "px", height: 2 * R + "px"}); }
+  [...$("s3a").children].forEach((d, i) => words(d, t, S3 + 0.2 + i * 0.3, 0.1, S4 - 0.6, 0.2));
+  words($("s3b").children[0], t, C.tiempo, 0.15, S4 - 0.55, 0.2);
+  maskIn("s3c", t, C.tiempo + 0.5, S4 - 0.55);
+  const v3 = 22.50 * eOut(prog(t, C.n2, C.n2 + 0.6)); $("s3n").textContent = "+" + money(v3);
+  { const sh = t > C.n2 + 0.6 && t < C.n2 + 1.0 ? Math.sin((t - C.n2) * 60) * 10 * (1 - prog(t, C.n2 + 0.6, C.n2 + 1.0)) : 0;
+    css("s3n", {transform: `translateX(${sh}px) scale(${clamp(spring(t, C.n2 - 0.1, 2.2, 0.6), 0, 1.2) * (1 - eIn(prog(t, S4 - 0.55, S4 - 0.3)))})`}); }
+  { const k = spring(t, C.tiempo + 0.3, 2.4, 0.6) * (1 - eIn(prog(t, S4 - 0.55, S4 - 0.3))); css("clock", {transform: `scale(${clamp(k, 0, 1.2)})`});
+    const sp = eIO(prog(t, C.tiempo + 0.4, C.n2)) * 540; $("hm").setAttribute("transform", `rotate(${sp * 6} 85 85)`); $("hh").setAttribute("transform", `rotate(${sp / 2} 85 85)`); }
+
+  // ===== 4 DIVIDE BY 16 =====
+  cutEls.forEach((l, i) => { const at = C.div + i * 0.2, k = eOut(prog(t, at, at + 0.3));
+    if (i < 3) l.setAttribute("y2", 14 + 542 * k); else l.setAttribute("x2", 14 + 792 * k); l.style.display = t >= at ? "" : "none"; });
+
+  // ===== 5 REAL SLICE + CTA =====
+  const fOn = t >= S5; vis("cell", fOn); vis("fin", t >= S5 + 0.45);
+  if (fOn) {
+    const cx0 = PX + 14 + CW, cy0 = PY + 14 + CH, lk = spring(t, S5, 2.4, 0.7), ek = eIO(prog(t, S5 + 0.25, S5 + 0.85));
+    let x = cx0 - 12 * clamp(lk, 0, 1.2), y = cy0 - 30 * clamp(lk, 0, 1.2), w = CW + 24 * clamp(lk, 0, 1.2), h = CH + 24 * clamp(lk, 0, 1.2);
+    x = lerp(x, 0, ek); y = lerp(y, 0, ek); w = lerp(w, 1080, ek); h = lerp(h, 1920, ek);
+    css("cell", {left: x + "px", top: y + "px", width: w + "px", height: h + "px", borderRadius: lerp(8, 0, ek) + "px"});
+    $("cellTex").style.opacity = 1 - eIO(prog(t, S5 + 0.25, S5 + 0.55));
+    $("sliceImg").style.transform = `scale(${lerp(1, 1.3, ek) + 0.04 * prog(t, S5 + 0.85, DUR)})`;
+    $("finSh").style.opacity = eIO(prog(t, S5 + 0.45, S5 + 0.85));
+  }
+  maskIn("fLab", t, S5 + 0.5);
+  css("fNum", {transform: `scale(${clamp(spring(t, S5 + 0.5, 2.2, 0.6), 0, 1.2)})`});
+  { const k = spring(t, S5 + 0.7, 2.0, 0.72); css("card", {transform: `translateY(${(1 - k) * 60}px) scale(${clamp(k, 0, 1.04)})`}); }
+  const cm = $("card").querySelectorAll(".mask"); maskIn(cm[0], t, S5 + 0.85); maskIn(cm[1], t, S5 + 1.0); maskIn(cm[2], t, C.cta); maskIn(cm[3], t, C.cta + 0.35);
+};
+window.DUR = DUR; window.DROP = DROP; window.BREAK = null;
+
+// ---------- sound effects (music + voice are mixed later) ----------
+sfx(C.p2, "thud"); sfx(C.s2, "whoosh");
+for (let i = 0; i < 5; i++) sfx(C.s2 + 0.25 + i * 0.1, "tap");
+sfx(C.s2 + 1.35, "whoosh"); sfx(C.s2 + 2.45, "whoosh"); sfx(C.s2 + 3.75, "sparkle");
+for (let n = 0; n < 5; n++) sfx(C.n1 + n * 0.12, "key"); sfx(C.n1 + 0.7, "chime");
+sfx(C.s3, "drop"); sfx(C.tiempo, "pop"); for (let n = 0; n < 5; n++) sfx(C.n2 + n * 0.1, "key"); sfx(C.n2 + 0.6, "thud");
+sfx(C.s4 - 0.45, "whoosh"); for (let i = 0; i < 6; i++) sfx(C.div + i * 0.2, "tick");
+sfx(C.n3, "pop"); sfx(C.n3 + 0.6, "chime"); sfx(C.s5, "whoosh"); sfx(C.s5 + 0.5, "sparkle"); sfx(C.cta, "pop");
+seek(0);
+</script></body></html>

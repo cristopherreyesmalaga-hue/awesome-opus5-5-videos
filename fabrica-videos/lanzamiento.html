@@ -1,0 +1,231 @@
+<!doctype html>
+<html lang="es"><head><meta charset="utf-8"><title>Mi Repostería · Lanzamiento v2</title>
+<style>
+:root{--crema:#FCF6EC;--cafe:#41261A;--fram:#AF4C60;--rosa:#FFDFE0;--choco:#573222;--sec:#7A6357;--borde:#EBDBCE;--card:#FFFDFA}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{width:1080px;height:1920px;overflow:hidden;background:var(--crema)}
+body{font-family:Inter,sans-serif;color:var(--cafe);-webkit-font-smoothing:antialiased}
+#stage{position:absolute;inset:0;overflow:hidden;background:var(--crema)}
+.abs{position:absolute}
+em,.em{font-style:italic;color:var(--fram)}
+.w{display:inline-block;overflow:hidden;vertical-align:top;padding:0 .02em .1em}
+.i{display:inline-block}
+.mask{overflow:hidden;display:block}
+.mask>span,.mask>div{display:inline-block}
+/* safe text column: clear of the Reels right rail (150px) */
+.col{position:absolute;left:80px;right:150px;text-align:center}
+.lab{font-weight:700;font-size:34px;letter-spacing:.2em;color:var(--fram)}
+/* hook */
+#hook{position:absolute;inset:0;overflow:hidden}
+#hook img{position:absolute;left:50%;top:50%;height:2150px;width:auto}
+#hookSh{position:absolute;inset:0;background:linear-gradient(180deg,rgba(40,22,14,.88) 0%,rgba(40,22,14,.7) 30%,rgba(40,22,14,0) 52%)}
+#hookT{top:250px;font-family:Lora,serif;font-weight:700;font-size:104px;line-height:1.06;color:var(--crema);text-shadow:0 4px 30px rgba(0,0,0,.35)}
+#hookT .em{color:var(--rosa)}
+#iris{left:0;top:0;z-index:5}
+/* pages */
+.page{position:absolute;inset:0;background:var(--crema)}
+#num{top:390px;font-family:Lora,serif;font-weight:700;font-size:300px;line-height:1;color:var(--fram);letter-spacing:-.02em}
+#form{top:740px;font-size:40px;line-height:1.4;color:var(--sec)}
+#form b{color:var(--cafe)}
+#rule{left:250px;width:410px;top:900px;height:3px;background:var(--borde);transform-origin:50% 50%}
+#loss{top:950px;font-family:Lora,serif;font-weight:700;font-size:86px;line-height:1.08}
+.stepT{top:315px;font-family:Lora,serif;font-weight:700;font-size:92px;line-height:1.06}
+.shot{position:absolute;left:90px;width:830px;border-radius:36px;overflow:hidden;background:var(--card);box-shadow:0 30px 70px rgba(65,38,26,.16),0 0 0 1.5px var(--borde)}
+.shot img{display:block;width:100%}
+.ui{position:absolute;left:90px;width:830px;top:590px;border-radius:40px;background:var(--card);box-shadow:0 30px 70px rgba(65,38,26,.16),0 0 0 1.5px var(--borde);padding:40px 48px 44px}
+.uh{font-family:Lora,serif;font-weight:700;font-size:52px;margin-bottom:6px}
+.us{font-weight:700;font-size:30px;letter-spacing:.14em;color:var(--fram);margin-bottom:18px}
+.mask>.ur{display:flex;width:100%}
+.ur{display:flex;justify-content:space-between;font-size:44px;padding:20px 0;border-bottom:2px solid var(--borde)}
+.ur b{font-weight:700}
+.ub{margin-top:26px;border:2px dashed var(--borde);border-radius:40px;text-align:center;font-size:36px;color:var(--sec);padding:18px}
+.fl{font-size:36px;font-weight:600;color:var(--sec);margin:18px 0 12px}
+.fi{display:flex;align-items:center;height:110px;border:2.5px solid var(--borde);border-radius:28px;padding:0 34px;font-size:56px;font-weight:700}
+.fi small{font-size:34px;font-weight:500;color:var(--sec);margin-left:18px}
+.fi .cur{display:inline-block;width:4px;height:58px;background:var(--fram);margin-left:4px}
+.ur.t{font-weight:700;border-bottom:0}
+#pp3{display:flex;justify-content:space-between;align-items:center;margin-top:14px;background:var(--rosa);border-radius:30px;padding:22px 34px}
+#pp3 span{font-size:42px;font-weight:700}
+#pp3 b{font-family:Lora,serif;font-size:84px;color:var(--fram);line-height:1}
+
+/* final */
+#flood{background:var(--choco);border-radius:50%;z-index:6}
+#fin{position:absolute;inset:0;z-index:7;color:var(--crema)}
+#logo{position:absolute;left:445px;top:230px;width:120px;height:120px;border-radius:50%;background:var(--crema);display:flex;align-items:center;justify-content:center}
+#fName{top:380px;font-family:Lora,serif;font-weight:700;font-size:104px;line-height:1.1}
+#fLab{top:515px;color:var(--rosa)}
+#pc{position:absolute;left:90px;width:830px;top:620px;height:420px;border-radius:44px;background:var(--crema);color:var(--cafe);text-align:center;transform-origin:50% 50%}
+#pc .a{position:absolute;left:0;right:0;top:48px;font-weight:700;font-size:32px;letter-spacing:.2em;color:var(--fram)}
+#pc .p{position:absolute;left:0;right:0;top:100px;font-family:Lora,serif;font-weight:700;font-size:150px;line-height:1}
+#pc .p small{font-size:56px;margin-left:12px}
+#pc .b{position:absolute;left:0;right:0;top:290px;font-size:42px;font-weight:600}
+#pc .c{position:absolute;left:0;right:0;top:350px;font-size:34px;color:var(--sec)}
+#cta1{top:1110px;font-family:Lora,serif;font-weight:700;font-size:88px;line-height:1.1}
+#cta1 .em{color:var(--rosa)}
+#cta2{top:1245px;font-size:44px;color:var(--rosa)}
+</style></head><body>
+<div id="stage">
+  <!-- 1 HOOK -->
+  <div id="hook"><img id="hookImg" src="assets/problema.jpg"><div id="hookSh"></div>
+    <div id="hookT" class="col"><div data-words>¿Tu tres leches</div><div data-words>te deja ganancia</div><div data-words><em>o solo trabajo?</em></div></div>
+  </div>
+  <svg id="iris" class="abs" width="1080" height="1920"></svg>
+
+  <!-- 2 REVEAL -->
+  <div class="page" id="p0">
+    <div class="col lab" style="top:320px"><span class="mask"><span>COSTO REAL DE UNA PORCIÓN</span></span></div>
+    <div id="num" class="col">$0.00</div>
+    <div id="form" class="col"><div class="mask"><span><b>$38.34</b> la tanda ÷ <b>16</b> porciones</span></div><div class="mask"><span>+ <b>$0.35</b> de empaque</span></div></div>
+    <div id="rule" class="abs"></div>
+    <div id="loss" class="col"><div data-words>¿La vendes a $2.50?</div><div data-words><em>Pierdes dinero.</em></div></div>
+  </div>
+
+  <!-- 3 STEPS -->
+  <div class="page" id="p1">
+    <div class="col lab" style="top:250px"><span class="mask"><span>PASO 1 DE 3</span></span></div>
+    <div class="col stepT"><div data-words>Anota tus</div><div data-words><em>ingredientes.</em></div></div>
+    <div class="ui" id="u1"><div class="uh">Tres leches</div><div class="us">INGREDIENTES</div>
+      <div class="mask"><div class="ur"><span>Leche condensada</span><b>$3.20</b></div></div>
+      <div class="mask"><div class="ur"><span>Leche evaporada</span><b>$2.40</b></div></div>
+      <div class="mask"><div class="ur"><span>Crema para batir</span><b>$4.80</b></div></div>
+      <div class="mask"><div class="ur"><span>Huevos, harina, azúcar</span><b>$4.00</b></div></div>
+      <div class="ub">+ Agregar ingrediente</div></div>
+  </div>
+  <div class="page" id="p2">
+    <div class="col lab" style="top:250px"><span class="mask"><span>PASO 2 DE 3</span></span></div>
+    <div class="col stepT"><div data-words>Suma tu tiempo</div><div data-words><em>y el empaque.</em></div></div>
+    <div class="ui" id="u2"><div class="uh">Costos extra</div>
+      <div class="fl">Tiempo de trabajo</div><div class="fi"><span id="ty1"></span><i class="cur" id="c1"></i><small>min por tanda</small></div>
+      <div class="fl" style="margin-top:34px">Empaque por porción</div><div class="fi"><span id="ty2"></span><i class="cur" id="c2"></i><small>caja y base</small></div></div>
+  </div>
+  <div class="page" id="p3">
+    <div class="col lab" style="top:250px"><span class="mask"><span>PASO 3 DE 3</span></span></div>
+    <div class="col stepT"><div data-words>Mira tu costo</div><div data-words><em>real.</em></div></div>
+    <div class="ui" id="u3"><div class="uh">Rinde 16 porciones</div>
+      <div class="mask"><div class="ur"><span>Ingredientes</span><b>$14.40</b></div></div>
+      <div class="mask"><div class="ur"><span>Mano de obra</span><b>$22.50</b></div></div>
+      <div class="mask"><div class="ur"><span>Indirectos</span><b>$1.44</b></div></div>
+      <div class="mask"><div class="ur t"><span>Total tanda</span><b>$38.34</b></div></div>
+      <div id="pp3"><span>Por porción</span><b>$2.75</b></div></div>
+  </div>
+
+  <!-- 4 OFFER + CTA -->
+  <div id="flood" class="abs"></div>
+  <div id="fin">
+    <div id="logo"><svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="#573222" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20h16v-7a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2z"/><path d="M4 15c1.5 1.2 3 1.2 4 0s3-1.2 4 0 3 1.2 4 0 2.5-1.2 4 0"/><path d="M12 11V7"/><path d="M12 7c-1 0-1.5-1-1-2s1-1.5 1-2c0 .5.5 1 1 2s0 2-1 2z"/></svg></div>
+    <div id="fName" class="col"><div data-words>Mi Repostería</div></div>
+    <div id="fLab" class="col lab"><span class="mask"><span>CALCULADORA PARA REPOSTERAS</span></span></div>
+    <div id="pc"><div class="a">APP + 2 BONOS</div><div class="p">$47<small>USD</small></div><div class="b">Un solo pago.</div><div class="c">Sin mensualidades.</div></div>
+    <div id="cta1" class="col"><div data-words>Comenta <em>«COSTO»</em></div></div>
+    <div id="cta2" class="col"><span class="mask"><span>y te envío el link por mensaje</span></span></div>
+  </div>
+</div>
+<script src="lib.js"></script>
+<script>
+splitWords();
+const vis = (id, on) => { $(id).style.display = on ? "" : "none"; };
+function maskIn(el, t, tin, tout = 1e9) {
+  if (typeof el === "string") el = $(el);
+  el.querySelectorAll(".mask>span,.mask>div").forEach((s, n) => {
+    const kin = spring(t, tin + n * 0.12, 2.4, 0.78), kout = eIn(prog(t, tout, tout + 0.22));
+    s.style.transform = `translateY(${(1 - kin) * 115 - kout * 130}%)`;
+  });
+}
+// iris over the whole frame
+const irisSvg = $("iris");
+irisSvg.innerHTML = Array.from({length: 6}, (_, i) => `<path fill="${i % 2 ? "#5E3726" : "#523020"}" stroke="rgba(252,246,236,.35)" stroke-width="3" stroke-linejoin="round"/>`).join("");
+const blades = [...irisSvg.querySelectorAll("path")];
+function iris(cx, cy, R, ap) {
+  const tw = (1 - clamp(ap / R)) * 0.75;
+  const V = Array.from({length: 6}, (_, k) => { const a = k * Math.PI / 3 + tw; return [cx + ap * Math.cos(a), cy + ap * Math.sin(a)]; });
+  const hit = (p, d) => { const px = p[0] - cx, py = p[1] - cy, b = px * d[0] + py * d[1], c = px * px + py * py - R * R; const s = -b + Math.sqrt(Math.max(0, b * b - c)); return [p[0] + s * d[0], p[1] + s * d[1]]; };
+  const dir = (a, b) => { const dx = b[0] - a[0], dy = b[1] - a[1], l = Math.hypot(dx, dy) || 1; return [dx / l, dy / l]; };
+  for (let i = 0; i < 6; i++) {
+    const A = V[i], Bv = V[(i + 1) % 6], Pv = V[(i + 5) % 6];
+    const P1 = hit(Bv, dir(A, Bv)), P0 = hit(A, dir(Pv, A));
+    let a1 = Math.atan2(P1[1] - cy, P1[0] - cx), a0 = Math.atan2(P0[1] - cy, P0[0] - cx);
+    let da = a0 - a1; while (da > Math.PI) da -= 2 * Math.PI; while (da < -Math.PI) da += 2 * Math.PI;
+    let d = `M${A[0]},${A[1]} L${Bv[0]},${Bv[1]} L${P1[0]},${P1[1]}`;
+    for (let s = 1; s <= 24; s++) { const a = a1 + da * s / 24; d += ` L${cx + R * Math.cos(a)},${cy + R * Math.sin(a)}`; }
+    blades[i].setAttribute("d", d + " Z");
+  }
+}
+
+// ---------- timeline (120 BPM, 40 beats = 20 s) ----------
+const CLOSE = 2.95, OPEN = 3.5, DROP = 3.5;          // iris closes on the hook, opens onto the number = drop
+const STEP = [7.5, 10.0, 12.5], FLOOD = 15.0, DUR = 20;
+const PAGES = ["p0", "p1", "p2", "p3"], PIN = [OPEN, ...STEP], PUSHD = 0.45;
+const RIRIS = 1130;
+
+window.seek = (t) => {
+  // HOOK
+  vis("hook", t < OPEN + 0.1);
+  $("hookImg").style.transform = `translate(-46%,-45%) scale(${1 + 0.06 * prog(t, 0, OPEN)})`;
+  const hk = $("hookT").children; words(hk[0], t, -0.8, 0.0); words(hk[1], t, -0.8, 0.0); words(hk[2], t, 0.55, 0.12);
+
+  // IRIS: closes over the hook, opens onto the number
+  const iOn = t >= CLOSE && t < OPEN + 0.45; vis("iris", iOn);
+  if (iOn) {
+    const ap = t < OPEN ? lerp(RIRIS * 1.2, 0.6, eIO(prog(t, CLOSE, CLOSE + 0.42))) : lerp(0.6, RIRIS * 1.2, eOut(prog(t, OPEN, OPEN + 0.42)));
+    iris(540, 960, RIRIS, ap);
+  }
+
+  // PAGES (horizontal push)
+  PAGES.forEach((p, i) => {
+    const tin = PIN[i], tnext = i < 3 ? PIN[i + 1] : 1e9;
+    vis(p, t >= tin && t < tnext + PUSHD && t < FLOOD + 0.45);
+    const kin = i === 0 ? 1 : eIO(prog(t, tin, tin + PUSHD)), kout = eIO(prog(t, tnext, tnext + PUSHD));
+    $(p).style.transform = `translateX(${(1 - kin) * 105 - kout * 105}%)`;
+  });
+
+  // p0 — the number
+  maskIn($("p0").children[0], t, OPEN + 0.15);
+  const kc = eOut(prog(t, OPEN + 0.2, OPEN + 0.95));
+  $("num").textContent = money(2.75 * kc);
+  css("num", {transform: `scale(${0.85 + 0.15 * spring(t, OPEN + 0.1, 2.0, 0.6)})`});
+  maskIn("form", t, 4.8);
+  $("rule").style.transform = `scaleX(${eOut(prog(t, 5.4, 5.8))})`;
+  const ls = $("loss").children; words(ls[0], t, 5.5, 0.1); words(ls[1], t, 6.1, 0.14);
+
+  // steps
+  STEP.forEach((s, i) => {
+    const pg = $("p" + (i + 1));
+    maskIn(pg.children[0], t, s + 0.15);
+    const tt = pg.children[1].children; words(tt[0], t, s + 0.2, 0.1); words(tt[1], t, s + 0.5, 0.1);
+    const k = spring(t, s + 0.35, 2.0, 0.72);
+    css(pg.children[2], {transform: `translateY(${(1 - k) * 90}px) scale(${0.94 + 0.06 * k})`});
+    pg.querySelectorAll(".ui .mask").forEach((m, n) => { const kk = spring(t, s + 0.5 + n * 0.15, 2.6, 0.78); m.firstElementChild.style.transform = `translateY(${(1 - kk) * 110}%)`; });
+  });
+  const typ = (id, txt, t0, cps) => { const n = Math.floor(clamp((t - t0) * cps, 0, txt.length)); $(id).textContent = txt.slice(0, n); };
+  typ("ty1", "90", STEP[1] + 0.75, 8); typ("ty2", "$0.35", STEP[1] + 1.25, 12);
+  vis("c1", t < STEP[1] + 1.2 && Math.floor(t * 4) % 2 === 0 || (t > STEP[1] + 0.7 && t < STEP[1] + 1.2));
+  vis("c2", t >= STEP[1] + 1.2);
+  { const kr = spring(t, STEP[2] + 1.2, 2.6, 0.55); css("pp3", {transform: `scale(${t < STEP[2] + 1.2 ? 0 : clamp(kr, 0, 1.25)})`}); }
+
+  // FLOOD from the ring, then the offer
+  const fOn = t >= FLOOD; vis("flood", fOn); vis("fin", t >= FLOOD + 0.2);
+  { const r3 = $("pp3"), cx = 90 + r3.offsetLeft + r3.offsetWidth / 2, cy = 590 + r3.offsetTop + r3.offsetHeight / 2, R = lerp(60, 2400, eIO(prog(t, FLOOD, FLOOD + 0.4)));
+    css("flood", {left: cx - R + "px", top: cy - R + "px", width: 2 * R + "px", height: 2 * R + "px"}); }
+  css("logo", {transform: `scale(${clamp(spring(t, FLOOD + 0.3, 2.4, 0.6), 0, 1.3)})`});
+  words($("fName").children[0], t, FLOOD + 0.4, 0.1);
+  maskIn("fLab", t, FLOOD + 0.6);
+  const kp = spring(t, FLOOD + 0.75, 2.0, 0.68);
+  css("pc", {transform: `translateY(${(1 - kp) * 60}px) scale(${clamp(kp, 0, 1.06)})`});
+  const beat = t > 17.5 ? 1 + 0.035 * Math.exp(-((t - 17.5) % BEAT) * 9) : 1;
+  words($("cta1").children[0], t, FLOOD + 1.25, 0.12);
+  css("cta1", {transform: `scale(${beat})`});
+  maskIn("cta2", t, FLOOD + 1.6);
+};
+window.DUR = DUR; window.DROP = DROP; window.BREAK = null;
+
+// ---------- sounds ----------
+sfx(0.0, "thud"); sfx(0.55, "pop");
+sfx(CLOSE, "whoosh"); sfx(CLOSE + 0.42, "tick"); sfx(OPEN, "drop"); sfx(OPEN + 0.1, "sparkle");
+for (let n = 0; n < 7; n++) sfx(OPEN + 0.2 + n * 0.11, "key");
+sfx(OPEN + 0.95, "chime"); sfx(4.8, "tick"); sfx(5.5, "pop"); sfx(6.1, "thud");
+STEP.forEach(s => { sfx(s, "whoosh"); sfx(s + 0.35, "pop"); });
+[0, 2].forEach(i => { for (let n = 0; n < 4; n++) sfx(STEP[i] + 0.5 + n * 0.15, "tick"); });
+sfx(STEP[1] + 0.75, "key"); sfx(STEP[1] + 0.87, "key"); for (let n = 0; n < 5; n++) sfx(STEP[1] + 1.25 + n / 12, "key");
+sfx(STEP[2] + 1.2, "pop"); sfx(STEP[2] + 1.25, "sparkle"); sfx(FLOOD, "whoosh"); sfx(FLOOD + 0.3, "pop"); sfx(FLOOD + 0.75, "pop"); sfx(FLOOD + 1.25, "chime");
+seek(0);
+</script></body></html>

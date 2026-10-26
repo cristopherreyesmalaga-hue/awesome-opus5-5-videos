@@ -1,0 +1,257 @@
+<!doctype html>
+<html lang="es"><head><meta charset="utf-8"><title>Mi Repostería · Explicador 30s</title>
+<style>
+:root{--crema:#FCF6EC;--cafe:#41261A;--fram:#AF4C60;--rosa:#FFDFE0;--choco:#573222;--suave:#F4EBE0;--sec:#7A6357;--borde:#EBDBCE;--card:#FFFDFA}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{width:1080px;height:1920px;overflow:hidden;background:var(--crema)}
+body{font-family:Inter,sans-serif;color:var(--cafe);-webkit-font-smoothing:antialiased}
+#stage{position:absolute;inset:0;overflow:hidden;background:var(--crema)}
+.serif{font-family:Lora,serif}
+em,.em{font-style:italic;color:var(--fram)}
+.w{display:inline-block;overflow:hidden;vertical-align:top;padding:0 .02em .08em}
+.i{display:inline-block}
+.lab{font-weight:700;font-size:28px;letter-spacing:.2em;text-transform:uppercase;color:var(--fram)}
+/* S1-S2 problem */
+#photo{position:absolute;inset:0;overflow:hidden}
+#photo img{position:absolute;left:50%;top:50%;height:2150px;width:auto;transform-origin:50% 50%}
+#shade{position:absolute;inset:0;background:linear-gradient(180deg,rgba(40,22,14,0) 35%,rgba(40,22,14,.82) 70%,rgba(40,22,14,.92))}
+#dark{position:absolute;inset:0;background:rgba(40,22,14,.62)}
+#p1{position:absolute;left:80px;right:80px;top:1240px;color:var(--crema)}
+#p1 .lab{color:var(--rosa);margin-bottom:22px}
+#p1 .tt{font-family:Lora,serif;font-weight:700;font-size:100px;line-height:1.06}
+#p1 .em{color:var(--rosa)}
+.pain{position:absolute;left:80px;right:80px;background:var(--card);border-radius:40px;padding:44px 50px;box-shadow:0 30px 70px rgba(0,0,0,.3)}
+.pain h4{font-family:Lora,serif;font-weight:700;font-size:62px;line-height:1.1;margin-bottom:14px}
+.pain p{font-size:38px;line-height:1.35;color:var(--sec)}
+.pain .x{position:absolute;right:44px;top:44px;width:62px;height:62px;border-radius:50%;background:var(--rosa);color:var(--fram);display:flex;align-items:center;justify-content:center;font-weight:800;font-size:36px}
+/* S3 brand */
+#flood{position:absolute;left:540px;top:960px;width:10px;height:10px;margin:-5px 0 0 -5px;border-radius:50%;background:var(--choco)}
+#brand{position:absolute;inset:0;text-align:center;color:var(--crema)}
+#brand .lg{position:absolute;left:465px;top:640px;width:150px;height:150px;border-radius:50%;background:var(--crema);display:flex;align-items:center;justify-content:center}
+#brand .nm{position:absolute;top:840px;left:0;right:0;font-family:Lora,serif;font-weight:700;font-size:136px;line-height:1}
+#brand .tag{position:absolute;top:1010px;left:0;right:0;font-weight:700;font-size:30px;letter-spacing:.24em;color:var(--rosa)}
+#brand .ln{position:absolute;top:1100px;left:120px;right:120px;font-size:40px;line-height:1.4;opacity:.92}
+/* S4 steps */
+#steps{position:absolute;inset:0}
+.stp{position:absolute;left:90px;right:90px;top:170px}
+.stp .n{font-family:Lora,serif;font-weight:700;font-size:150px;line-height:1;color:var(--fram)}
+.stp .tt{font-family:Lora,serif;font-weight:600;font-size:88px;line-height:1.05;margin-top:16px}
+.stp .d{font-size:38px;line-height:1.4;color:var(--sec);margin-top:22px}
+.shot{position:absolute;left:90px;width:900px;border-radius:44px;overflow:hidden;background:var(--card);box-shadow:0 30px 80px rgba(65,38,26,.16),0 0 0 1px var(--borde)}
+.shot img{display:block;width:100%}
+#hl{position:absolute;left:0;right:0;border-radius:16px;background:rgba(175,76,96,.16);box-shadow:0 0 0 4px var(--fram) inset}
+/* S5 phone */
+#s5h{position:absolute;left:0;right:0;top:120px;text-align:center}
+#s5h .tt{font-family:Lora,serif;font-weight:700;font-size:86px;line-height:1.05;padding:0 60px}
+#pill{position:absolute;left:0;right:0;top:350px;text-align:center}
+.pl{display:inline-block;height:76px;line-height:76px;padding:0 40px;border-radius:38px;background:var(--rosa);color:var(--fram);font-weight:700;font-size:34px;position:absolute;left:50%;white-space:nowrap}
+#phone{position:absolute;left:229px;top:500px;width:414px;height:868px;border-radius:64px;background:#24160f;padding:12px;transform-origin:0 0;box-shadow:0 40px 90px rgba(65,38,26,.28)}
+#screen{position:relative;width:390px;height:844px;border-radius:52px;overflow:hidden;background:var(--crema)}
+#screen img{position:absolute;top:0;left:0;width:390px;height:844px}
+/* S6 offer */
+#offer{position:absolute;inset:0}
+#offer .h{position:absolute;left:90px;right:90px;top:150px;font-family:Lora,serif;font-weight:700;font-size:96px;line-height:1.05}
+.item{position:absolute;left:90px;right:90px;height:200px;display:flex;align-items:center;gap:36px;background:var(--card);border-radius:36px;padding:0 30px;box-shadow:0 14px 40px rgba(65,38,26,.08),0 0 0 1px var(--borde)}
+.item .im{width:150px;height:150px;border-radius:26px;overflow:hidden;flex:none;background:var(--suave);display:flex;align-items:center;justify-content:center}
+.item .im img{width:100%;height:100%;object-fit:cover}
+.item h5{font-family:Lora,serif;font-weight:700;font-size:48px;line-height:1.1}
+.item p{font-size:31px;color:var(--sec);margin-top:6px}
+.item .bn{position:absolute;right:30px;top:24px;font-weight:800;font-size:22px;letter-spacing:.14em;color:var(--fram)}
+#price{position:absolute;left:90px;right:90px;top:1320px;height:460px;border-radius:44px;background:var(--choco);color:var(--crema);text-align:center;transform-origin:50% 50%}
+#price .a{position:absolute;top:56px;left:0;right:0;font-weight:700;font-size:30px;letter-spacing:.2em}
+#price .p{position:absolute;top:110px;left:0;right:0;font-family:Lora,serif;font-weight:700;font-size:190px;line-height:1}
+#price .p small{font-family:Inter;font-size:44px;font-weight:600;margin-left:8px}
+#price .b{position:absolute;top:330px;left:0;right:0;font-weight:700;font-size:36px;letter-spacing:.14em}
+#price .c{position:absolute;top:385px;left:0;right:0;font-size:32px;opacity:.85}
+/* S7 end */
+#endbg{position:absolute;inset:0;background:var(--choco)}
+#end{position:absolute;inset:0;text-align:center;color:var(--crema)}
+#end .tt{position:absolute;left:70px;right:70px;top:560px;font-family:Lora,serif;font-weight:700;font-size:118px;line-height:1.08}
+#end .em{color:var(--rosa)}
+#end .btn{position:absolute;left:190px;right:190px;top:1050px;height:140px;border-radius:70px;background:var(--fram);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:50px;color:#fff;box-shadow:0 18px 40px rgba(0,0,0,.25)}
+#end .note{position:absolute;top:1225px;left:0;right:0;font-size:34px;opacity:.85}
+#end .sig{position:absolute;top:1480px;left:0;right:0;display:flex;align-items:center;justify-content:center;gap:22px;font-family:Lora,serif;font-weight:700;font-size:58px}
+#end .sig .c{width:84px;height:84px;border-radius:50%;background:var(--crema);display:flex;align-items:center;justify-content:center}
+</style></head>
+<body>
+<div id="stage">
+  <!-- S1/S2 problem -->
+  <div id="photo"><img id="pimg" src="assets/problema.jpg"><div id="shade"></div><div id="dark"></div></div>
+  <div id="p1"><div class="lab"><span data-words>¿Te pasa al cobrar?</span></div><div class="tt" data-words>Tus postres están listos. El precio, todavía <em>a ojo.</em></div></div>
+  <div class="pain" id="pn0"><div class="x">✕</div><h4>Sumas los ingredientes…</h4><p>Pero dejas fuera tu tiempo, el horno o la caja.</p></div>
+  <div class="pain" id="pn1"><div class="x">✕</div><h4>Te piden una cotización…</h4><p>Y terminas comparándote con lo que cobra otra repostera.</p></div>
+  <div class="pain" id="pn2"><div class="x">✕</div><h4>Das un precio…</h4><p>Y después no sabes si cubriste todos tus costos.</p></div>
+
+  <!-- S3 brand -->
+  <div id="flood"></div>
+  <div id="brand">
+    <div class="lg" id="bLg"><svg width="78" height="78" viewBox="0 0 24 24" fill="none" stroke="#573222" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20h16v-7a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2z"/><path d="M4 15c1.5 1.2 3 1.2 4 0s3-1.2 4 0 3 1.2 4 0 2.5-1.2 4 0"/><path d="M12 11V7"/><path d="M12 7c-1 0-1.5-1-1-2s1-1.5 1-2c0 .5.5 1 1 2s0 2-1 2z"/></svg></div>
+    <div class="nm" id="bNm" data-words>Mi Repostería</div>
+    <div class="tag" id="bTag">CALCULADORA PARA REPOSTERAS</div>
+    <div class="ln" id="bLn">Reúne ingredientes, tiempo, gastos y empaque para que conozcas el costo de cada receta.</div>
+  </div>
+
+  <!-- S4 steps -->
+  <div id="steps">
+    <div class="stp" id="st0"><div class="n" data-words>01</div><div class="tt" data-words>Anota lo que usas.</div><div class="d" id="d0">Ingredientes, cantidades y el precio de cada paquete.</div></div>
+    <div class="stp" id="st1"><div class="n" data-words>02</div><div class="tt" data-words>Incluye tu trabajo.</div><div class="d" id="d1">Tus minutos de preparación y el empaque.</div></div>
+    <div class="stp" id="st2"><div class="n" data-words>03</div><div class="tt" data-words>Consulta tu costo.</div><div class="d" id="d2">Costo por porción antes de decidir tu precio.</div></div>
+    <div class="shot" id="sh0" style="top:800px"><img src="assets/demo-ingredientes.jpg"></div>
+    <div class="shot" id="sh1" style="top:800px"><img src="assets/demo-tiempo.jpg"></div>
+    <div class="shot" id="sh2" style="top:800px"><img src="assets/demo-costo.jpg"><div id="hl"></div></div>
+  </div>
+
+  <!-- S5 phone montage -->
+  <div id="s5h"><div class="tt"><div data-words>Más orden para</div><div data-words><em>tu día a día.</em></div></div></div>
+  <div id="pill">
+    <div class="pl" id="pl0">Pedidos y fechas de entrega</div>
+    <div class="pl" id="pl1">Clientas y saldos pendientes</div>
+    <div class="pl" id="pl2">Compras de ingredientes</div>
+    <div class="pl" id="pl3">Qué preparar esta semana</div>
+  </div>
+  <div id="phone"><div id="screen">
+    <img id="sc0" src="assets/pedidos-movil.png"><img id="sc1" src="assets/clientes-movil.png"><img id="sc2" src="assets/compras-movil.png"><img id="sc3" src="assets/produccion-movil.png">
+  </div></div>
+
+  <!-- S6 offer -->
+  <div id="offer">
+    <div class="h" data-words>Todo lo que incluye <em>tu compra.</em></div>
+    <div class="item" id="it0" style="top:420px"><div class="im"><img src="assets/hero-editorial.jpg" style="object-position:70% 40%"></div><div><h5>Acceso a la app</h5><p>Desde tu celular o computadora.</p></div></div>
+    <div class="item" id="it1" style="top:650px"><div class="im"><img src="assets/bonus-guia.jpg"></div><div><h5>Guía de uso</h5><p>PDF de 16 páginas.</p></div><div class="bn">BONO</div></div>
+    <div class="item" id="it2" style="top:880px"><div class="im"><img src="assets/bonus-recetario.jpg"></div><div><h5>Recetario de 10 recetas</h5><p>Con ingredientes y rendimiento.</p></div><div class="bn">BONO</div></div>
+    <div id="price"><div class="a" id="pa">APP + 2 BONOS</div><div class="p" id="pp">$47<small>USD</small></div><div class="b" id="pb">UN SOLO PAGO</div><div class="c" id="pc">Sin mensualidades.</div></div>
+  </div>
+
+  <!-- S7 end -->
+  <div id="endbg"></div>
+  <div id="end">
+    <div class="tt" id="eTt" data-words>Antes de dar un precio, <em>conoce tu costo.</em></div>
+    <div class="btn" id="eBtn">Comenta «COSTO»</div>
+    <div class="note" id="eNote">y te envío el link por mensaje</div>
+    <div class="sig" id="eSig"><div class="c"><svg width="46" height="46" viewBox="0 0 24 24" fill="none" stroke="#573222" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20h16v-7a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2z"/><path d="M4 15c1.5 1.2 3 1.2 4 0s3-1.2 4 0 3 1.2 4 0 2.5-1.2 4 0"/><path d="M12 11V7"/><path d="M12 7c-1 0-1.5-1-1-2s1-1.5 1-2c0 .5.5 1 1 2s0 2-1 2z"/></svg></div>Mi Repostería</div>
+  </div>
+</div>
+<script src="lib.js"></script>
+<script>
+splitWords();
+const DUR = 30, DROP = 7.5;
+const S3 = 7.5, S4 = 9.6, S5 = 17.1, S6 = 23.0, S7 = 26.9;
+const STEP = 2.5, SLOT = [560, 860, 1160];
+const vis = (id, on) => css(id, {display: on ? "" : "none"});
+const pop = (id, t, at, dy = 40, f = 2.2, z = 0.72) => { const k = spring(t, at, f, z); css(id, {opacity: clamp(k * 1.5), transform: `translateY(${(1 - k) * dy}px)`}); return k; };
+
+function s12(t){
+  const on = t < S3 + 0.7;
+  vis("photo", on); vis("p1", on);
+  const z = 1.0 + 0.1 * prog(t, 0, S3);
+  css("pimg", {transform: `translate(-46%,-45%) scale(${z})`});
+  css("dark", {opacity: 0.0 + 0.85 * eIO(prog(t, 2.9, 3.4))});
+  const p1 = $("p1");
+  p1.querySelectorAll("[data-words]").forEach((el, k) => words(el, t, 0.1 + k * 0.18, 0.13, 2.9, 0.3));
+  for (let n = 0; n < 3; n++){
+    const at = 3.0 + n * 1.45;
+    const k = spring(t, at, 1.9, 0.74);
+    const out = eIn(prog(t, S3 - 0.1 + n * 0.06, S3 + 0.35 + n * 0.06));
+    css("pn" + n, {top: SLOT[n] + "px", visibility: t > at - 0.05 && t < S3 + 0.6 ? "visible" : "hidden",
+      transform: `translateX(${(1 - k) * 1100 - out * 1300}px) rotate(${(1 - k) * 4}deg)`});
+  }
+}
+
+function s3(t){
+  const r = eOut(prog(t, S3 - 0.05, S3 + 0.45)) * 2300;
+  css("flood", {transform: `scale(${r / 5})`, visibility: t > S3 - 0.05 && t < S4 + 0.8 ? "visible" : "hidden"});
+  const on = t > S3 + 0.15 && t < S4 + 0.8;
+  vis("brand", on);
+  const kl = spring(t, S3 + 0.15, 2, 0.6); css("bLg", {transform: `scale(${kl})`});
+  words("bNm", t, S3 + 0.3, 0.13, S4 - 0.15, 0.3);
+  pop("bTag", t, S3 + 0.6); pop("bLn", t, S3 + 0.9);
+  // chocolate panel lifts away
+  const up = eIO(prog(t, S4 - 0.2, S4 + 0.45));
+  css("flood", {marginTop: `${-5 - up * 2200}px`});
+  css("brand", {transform: `translateY(${-up * 2200}px)`});
+}
+
+function s4(t){
+  const on = t > S4 - 0.3 && t < S5 + 0.6; vis("steps", on); if (!on) return;
+  for (let n = 0; n < 3; n++){
+    const a = S4 + n * STEP, b = a + STEP;
+    const last = n === 2;
+    const outT = last ? S5 - 0.25 : b - 0.2;
+    $("st" + n).querySelectorAll("[data-words]").forEach((el, k) => words(el, t, a + k * 0.12, 0.08, outT, 0.25));
+    const kd = spring(t, a + 0.35, 2.2, 0.75), od = eIn(prog(t, outT, outT + 0.25));
+    css("d" + n, {opacity: clamp(kd * 1.4) * (1 - od), transform: `translateY(${(1 - kd) * 30}px)`});
+    // screenshot card: slides in from right, pushes out to left
+    const ki = spring(t, a, 1.7, 0.8), ko = eIO(prog(t, b - 0.25, b + 0.25));
+    const x = (1 - ki) * 1100 - (last ? 0 : ko * 1100);
+    let s = 1, y = 0;
+    if (last){ // zoom into cost-per-portion row
+      const kz = eIO(prog(t, a + 1.1, a + 1.6));
+      s = lerp(1, 1.18, kz); y = lerp(0, -40, kz);
+      const out = eIn(prog(t, S5 - 0.3, S5 + 0.2));
+      css("sh2", {opacity: 1 - out});
+    }
+    css("sh" + n, {transform: `translate(${x}px,${y}px) scale(${s})`, visibility: t > a - 0.1 && (last || t < b + 0.3) ? "visible" : "hidden"});
+  }
+  // highlight on "Costo por porción $2.75" (rows at ~ 545-620 of 711 in the source image)
+  const hk = spring(t, S4 + 2 * STEP + 1.3, 2.4, 0.7);
+  css("hl", {top: `${545 / 711 * 711}px`, height: "78px", left: "62px", right: "62px", opacity: clamp(hk), transform: `scaleX(${0.8 + 0.2 * clamp(hk, 0, 1.1)})`});
+}
+
+function s5(t){
+  const on = t > S5 - 0.4 && t < S6 + 0.6; vis("s5h", on); vis("pill", on); vis("phone", on); if (!on) return;
+  $("s5h").querySelectorAll("[data-words]").forEach((el, k) => words(el, t, S5 + k * 0.3, 0.1, S6 - 0.3, 0.3));
+  const rise = spring(t, S5 - 0.2, 1.5, 0.8), drop = eIn(prog(t, S6 - 0.35, S6 + 0.15));
+  css("phone", {transform: `translateY(${(1 - rise) * 1500 + drop * 1600}px) scale(1.5)`});
+  const seg = (S6 - S5 - 0.4) / 4;
+  for (let n = 0; n < 4; n++){
+    const a = S5 + 0.4 + n * seg;
+    // screen push: enters from right at a, leaves left at a+seg
+    const ki = n === 0 ? 1 : eIO(prog(t, a - 0.18, a + 0.18)), ko = n === 3 ? 0 : eIO(prog(t, a + seg - 0.18, a + seg + 0.18));
+    css("sc" + n, {transform: `translateX(${(1 - ki) * 390 - ko * 390}px)`});
+    const kp = spring(t, a, 2.4, 0.75), op = n === 3 ? eIn(prog(t, S6 - 0.35, S6)) : eIn(prog(t, a + seg - 0.15, a + seg + 0.05));
+    css("pl" + n, {opacity: clamp(kp * 1.5) * (1 - op), transform: `translate(-50%, ${(1 - kp) * 30}px) scale(${0.9 + 0.1 * clamp(kp)})`});
+  }
+}
+
+function s6(t){
+  const on = t > S6 - 0.1 && t < S7 + 1.0; vis("offer", on); if (!on) return;
+  const out = eIn(prog(t, S7 - 0.3, S7 + 0.1));
+  words($("offer").querySelector(".h"), t, S6, 0.1, S7 - 0.3, 0.3);
+  for (let n = 0; n < 3; n++){
+    const k = spring(t, S6 + 0.45 + n * 0.35, 2, 0.74);
+    css("it" + n, {opacity: clamp(k * 1.5) * (1 - out), transform: `translateX(${(1 - k) * -900}px)`});
+  }
+  const kp = spring(t, S6 + 1.6, 1.8, 0.65);
+  // price card grows into full-screen end background at S7
+  const g = eIO(prog(t, S7 - 0.1, S7 + 0.5));
+  const L = lerp(90, 0, g), T = lerp(1320, 0, g), W = lerp(900, 1080, g), H = lerp(460, 1920, g), R = lerp(44, 0, g);
+  css("price", {left: L + "px", top: T + "px", width: W + "px", height: H + "px", right: "auto", borderRadius: R + "px",
+    transform: `translateY(${(1 - kp) * 600}px)`, opacity: clamp(kp * 2)});
+  ["pa", "pp", "pb", "pc"].forEach((id, i) => { const k = spring(t, S6 + 1.85 + i * 0.12, 2.4, 0.7); css(id, {opacity: clamp(k * 1.5) * (1 - eIn(prog(t, S7 - 0.2, S7 + 0.1))), transform: `translateY(${(1 - k) * 30 + g * 500}px)`}); });
+}
+
+function s7(t){
+  const on = t > S7 + 0.4; vis("endbg", on); vis("end", t > S7 + 0.3);
+  words("eTt", t, S7 + 0.35, 0.13);
+  const kb = pop("eBtn", t, S7 + 1.4);
+  if (t > S7 + 2.0) css("eBtn", {transform: `scale(${1 + 0.045 * Math.sin((t - S7 - 2.0) * 6)})`});
+  pop("eNote", t, S7 + 1.65); pop("eSig", t, S7 + 1.9);
+}
+
+window.seek = (t) => { s12(t); s3(t); s4(t); s5(t); s6(t); s7(t); };
+(function(){
+  [0.1, 0.55, 1.0, 1.5].forEach(t => sfx(t, "thud"));
+  for (let n = 0; n < 3; n++){ sfx(3.0 + n * 1.45 - 0.05, "whoosh"); sfx(3.0 + n * 1.45 + 0.15, "pop"); }
+  sfx(S3, "drop"); sfx(S3 + 0.3, "sparkle");
+  for (let n = 0; n < 3; n++){ sfx(S4 + n * STEP - 0.15, "whoosh"); sfx(S4 + n * STEP + 0.1, "thud"); }
+  sfx(S4 + 2 * STEP + 1.3, "chime");
+  sfx(S5 - 0.2, "whoosh");
+  const seg = (S6 - S5 - 0.4) / 4; for (let n = 0; n < 4; n++) { sfx(S5 + 0.4 + n * seg - 0.05, "tap"); sfx(S5 + 0.4 + n * seg, "tick"); }
+  for (let n = 0; n < 3; n++) sfx(S6 + 0.45 + n * 0.35, "pop");
+  sfx(S6 + 1.6, "drop"); sfx(S6 + 1.95, "chime");
+  sfx(S7 - 0.1, "whoosh"); sfx(S7 + 1.4, "pop"); sfx(S7 + 1.9, "sparkle");
+  window.DUR = DUR; window.DROP = DROP;
+  seek(0);
+})();
+</script>
+</body></html>
