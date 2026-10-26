@@ -18,6 +18,9 @@ Plantillas y motor para hacer Reels/TikTok 1080×1920 «como código» (cada cua
 - `mezcla.py video-silent.mp4 fondo.wav salida.mp4 [--voz voz.wav]`: música bajo la voz y -14 LUFS.
 - `qa.py video.mp4`: hoja con zona segura de Reels, saltos de imagen y volumen.
 
+## Cómo mejora
+`LECCIONES.md` es la bitácora: la skill la lee antes de cada video y le agrega lo que aprobaste, rechazaste o corregiste (y los resultados en redes cuando los compartas). Las lecciones que se repiten pasan a las reglas de la skill.
+
 ## Uso rápido
 ```
 cp -r marcas/mi-reposteria/assets ./assets
