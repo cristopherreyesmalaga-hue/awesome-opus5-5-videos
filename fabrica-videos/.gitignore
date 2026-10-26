@@ -4,3 +4,4 @@
 /receta-voz.html
 __pycache__/
 *.wav
+*-g[0-9]*-*.html

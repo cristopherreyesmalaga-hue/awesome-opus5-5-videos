@@ -1,0 +1,101 @@
+<title>%%TITULO%%</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,600;1,600&family=Inter:wght@400;600&display=swap">
+<style>
+  /* Una columna: encabezado de la entrega, luego una ficha por video (video, descarga, descripción del Reel). */
+  :root {
+    --bg: %%FONDO%%; --card: %%TARJETA%%; --ink: %%TINTA%%; --muted: %%SUAVE%%; --line: %%BORDE%%;
+    --accent: %%ACENTO%%; --on-accent: #ffffff; --ok: #2f7d5b; --err: #b23a48;
+    --display: Lora, Georgia, serif; --body: Inter, system-ui, sans-serif;
+  }
+  @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+    --bg: #1b1412; --card: #261c19; --ink: #f5ece4; --muted: #b9a79b; --line: #3a2c27; --ok: #6fd3a5; --err: #ff8f9c; color-scheme: dark } }
+  :root[data-theme="dark"] {
+    --bg: #1b1412; --card: #261c19; --ink: #f5ece4; --muted: #b9a79b; --line: #3a2c27; --ok: #6fd3a5; --err: #ff8f9c; color-scheme: dark }
+  body { background: var(--bg); color: var(--ink); font: 15px/1.5 var(--body);
+    padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+  main { max-width: 520px; margin: 0 auto; padding-block: 28px 48px; display: flex; flex-direction: column; gap: 28px; }
+  header { display: flex; flex-direction: column; gap: 6px; }
+  .kicker { font-size: 12px; letter-spacing: .14em; text-transform: uppercase; color: var(--accent); font-weight: 600; }
+  h1 { font: 600 32px/1.12 var(--display); margin: 0; text-wrap: balance; }
+  .meta { color: var(--muted); margin: 0; }
+  article { background: var(--card); border: 1px solid var(--line); border-radius: 20px; padding: 18px; display: flex; flex-direction: column; gap: 12px; min-width: 0; }
+  h2 { font: 600 22px/1.2 var(--display); margin: 0; text-wrap: balance; }
+  .uso { margin: 0; color: var(--muted); }
+  .uso b { color: var(--ink); font-weight: 600; }
+  video { width: 100%; max-width: 100%; aspect-ratio: 9 / 16; background: #000; border-radius: 14px; }
+  .acciones { display: flex; flex-wrap: wrap; gap: 10px; }
+  button { appearance: none; border: 1px solid var(--accent); border-radius: 999px; font: 600 15px var(--body); padding: 12px 18px; cursor: pointer; background: transparent; color: var(--accent); }
+  button.primario { background: var(--accent); color: var(--on-accent); }
+  button:focus-visible { outline: 3px solid var(--ink); outline-offset: 2px; }
+  button[disabled] { opacity: .6; cursor: default; }
+  .estado { min-height: 20px; font-size: 14px; margin: 0; color: var(--muted); }
+  .estado.ok { color: var(--ok); } .estado.err { color: var(--err); }
+  details { border-top: 1px solid var(--line); padding-top: 10px; }
+  summary { cursor: pointer; font-weight: 600; }
+  pre { white-space: pre-wrap; word-break: break-word; font: 14px/1.55 var(--body); margin: 10px 0; color: var(--ink); }
+  .tips { color: var(--muted); font-size: 14px; margin: 0; }
+  @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+</style>
+<main>
+  <header>
+    <div class="kicker">%%KICKER%%</div>
+    <h1>%%TITULO%%</h1>
+    <p class="meta">%%META%%</p>
+    <p class="tips">En iPhone o iPad, al tocar <b>Descargar</b> se abre el menú de compartir: elige <b>Guardar video</b> para que quede en Fotos.</p>
+  </header>
+  <div id="lista" style="display:flex;flex-direction:column;gap:22px"></div>
+</main>
+<script id="datos" type="application/json">%%DATOS%%</script>
+<script>
+  const videos = JSON.parse(document.getElementById("datos").textContent);
+  const lista = document.getElementById("lista");
+  const downloadsP = window.claude?.use ? claude.use("downloads") : Promise.resolve(null);
+
+  videos.forEach((v, i) => {
+    const a = document.createElement("article");
+    a.innerHTML = `<h2></h2><p class="uso"></p><video controls playsinline preload="metadata"></video>
+      <div class="acciones"><button class="primario" type="button" id="bajar-${i}">Descargar video</button>
+      <button type="button" id="copiar-${i}">Copiar descripción</button></div>
+      <p class="estado" role="status"></p>
+      <details><summary>Descripción para el Reel</summary><pre></pre></details>`;
+    a.querySelector("h2").textContent = v.titulo;
+    a.querySelector(".uso").innerHTML = "";
+    const b = document.createElement("b"); b.textContent = v.etapa ? v.etapa + ". " : "";
+    a.querySelector(".uso").append(b, document.createTextNode(v.uso || ""));
+    a.querySelector("video").src = v.archivo;
+    a.querySelector("pre").textContent = v.descripcion || "";
+    const estado = a.querySelector(".estado");
+    const say = (t, c) => { estado.textContent = t; estado.className = "estado " + (c || ""); };
+
+    const bajar = a.querySelector(`#bajar-${i}`);
+    bajar.addEventListener("click", async () => {
+      const downloads = await downloadsP;
+      if (!downloads) { say("Esta vista no permite descargar. Abre el enlace en la app de Claude o en claude.ai.", "err"); return; }
+      bajar.disabled = true; say("Preparando el video…");
+      try {
+        const res = await fetch(v.archivo);
+        if (!res.ok) throw { code: "fetch" };
+        const r = await downloads.save({ filename: v.archivo, data: await res.blob() });
+        say(r.status === "saved" ? "Listo. Revisa tus Fotos o tu carpeta de Descargas." : "Enviado.", "ok");
+      } catch (e) {
+        const c = e && e.code;
+        if (c === "declined") say("Descarga cancelada. Puedes intentarlo de nuevo.");
+        else if (c === "rate_limited") say("Ya hay una descarga abierta. Espera un momento y vuelve a tocar el botón.");
+        else if (c === "fetch") say("No se pudo cargar el video. Recarga la página e inténtalo otra vez.", "err");
+        else if (c === "too_large") say("El video es demasiado grande para esta vista.", "err");
+        else say("Esta vista no permite descargar. Abre el enlace en la app de Claude o en claude.ai.", "err");
+      } finally { bajar.disabled = false; }
+    });
+
+    a.querySelector(`#copiar-${i}`).addEventListener("click", () => {
+      const pre = a.querySelector("pre");
+      navigator.clipboard.writeText(v.descripcion || "").then(
+        () => say("Descripción copiada.", "ok"),
+        () => { a.querySelector("details").open = true; const s = getSelection(), r = document.createRange();
+                r.selectNodeContents(pre); s.removeAllRanges(); s.addRange(r);
+                say("Selecciona y copia el texto de abajo."); });
+    });
+    lista.append(a);
+  });
+</script>

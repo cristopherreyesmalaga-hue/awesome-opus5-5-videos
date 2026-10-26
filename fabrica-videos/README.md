@@ -17,6 +17,8 @@ Plantillas y motor para hacer Reels/TikTok 1080×1920 «como código» (cada cua
 - `voz.py salida.wav parte1.wav parte2.wav…`: une la voz en partes (Higgsfield corta a 25 s) y da el inicio de cada frase.
 - `mezcla.py video-silent.mp4 fondo.wav salida.mp4 [--voz voz.wav]`: música bajo la voz y -14 LUFS.
 - `qa.py video.mp4`: hoja con zona segura de Reels, saltos de imagen y volumen.
+- `ganchos.py video.html ganchos.json`: variantes que solo cambian el gancho, para probar cuál retiene más.
+- `entrega.py entrega.json carpeta`: página para ver y descargar los videos desde el celular o el iPad, con la descripción del Reel lista para copiar (`entrega/pagina.html`).
 
 ## Cómo mejora
 `LECCIONES.md` es la bitácora: la skill la lee antes de cada video y le agrega lo que aprobaste, rechazaste o corregiste (y los resultados en redes cuando los compartas). Las lecciones que se repiten pasan a las reglas de la skill.

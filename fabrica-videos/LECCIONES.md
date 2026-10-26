@@ -9,6 +9,22 @@ Así cada video aprovecha lo aprendido en los anteriores.
 3. **Cuando el usuario comparta resultados** (vistas, retención a los 3 s, comentarios con la palabra clave, ventas), anótalos en la entrada de ese video. Es la señal más valiosa: dice qué vende, no solo qué se ve bien.
 4. **Consolidar:** si una lección se repite 2 veces o el usuario la pide como regla, pásala a las «Reglas de calidad» de la skill, muévela a «Ya consolidadas» y sube el cambio al fork.
 
+## Cómo leer los resultados de un video
+Pide al usuario estas cifras de Instagram (Estadísticas del Reel) unos 3–7 días después de publicar:
+| Cifra | Cálculo | Qué mide | Si sale baja, cambia… |
+|---|---|---|---|
+| Retención del gancho | reproducciones de 3 s ÷ impresiones (o «% que siguió viendo después de 3 s») | el gancho | solo los primeros 3 s (prueba otro gancho con `ganchos.py`) |
+| Retención al final | % que vio hasta el CTA | la historia y el ritmo | el orden o la duración de las escenas; quita texto |
+| Comentarios con la palabra | comentarios «COSTO» ÷ reproducciones | el cierre y la oferta | el CTA, el precio en pantalla o el gancho de la oferta |
+| Ventas | ventas ÷ conversaciones de ManyChat | el mensaje de ManyChat y la página, no el video | nada del video |
+Nunca atribuyas el resultado a un solo elemento con una sola publicación; compara con los otros videos del mismo formato y anota la hipótesis.
+
+## Prueba de ganchos
+Cada video sale con su gancho principal y 2 variantes (`ganchos.py`). Anota en la entrada qué gancho usó cada versión y cuál ganó (retención de 3 s). La hipótesis se escribe para que pueda perder, por ejemplo: «El gancho de pregunta con precio supera al de dolor en retención de 3 s, en reposteras que ya venden».
+
+## Revisión mensual
+Una vez al mes, agrega una entrada «Revisión <mes>» con: ganadores (cifras y qué elemento lo logró), perdedores (en qué cifra murieron y por qué creemos), métricas sueltas que salieron bien en un video perdedor, aprendizajes nuevos (pásalos a «Pendientes de consolidar») y el plan de pruebas del mes siguiente.
+
 ## Pendientes de consolidar
 _(vacío: todo lo aprendido hasta ahora ya está en las reglas de la skill)_
 
